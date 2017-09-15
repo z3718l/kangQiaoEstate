@@ -1,0 +1,317 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    tap-highlight-color: rgba(0, 0, 0, 0);
+    text-size-adjust: none;
+    font-family: "Heiti SC", "STHeitisc", "Microsoft YaHei", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 14px;
+    letter-spacing: -0.05em;
+    overflow: hidden;
+    box-sizing: border-box;
+    color: #333;
+}
+
+html {
+    text-size-adjust: none;
+}
+
+a,
+img {
+    touch-callout: none;
+    /* 禁止长按链接与图片弹出菜单 */
+}
+
+html,
+body {
+    user-select: none;
+    /* 禁止选中文本（如无文本选中需求，此为必选项） */
+    user-select: none;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.slide-view {
+    background: rgb(0, 0, 0);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.pv-inner {
+    position: relative;
+    z-index: -1;
+    display: -webkit-box;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all 350ms linear;
+    -webkit-backface-visibility: hidden;
+}
+
+.pv-inner li {
+    text-align: center;
+}
+
+.pv-inner img {
+    max-width: 97%;
+    vertical-align: middle;
+    -webkit-transform: scale(1) translate(0px, 0px);
+    max-height: 100%;
+    visibility: visible;
+    -webkit-transition: 200ms;
+    -webkit-user-select: none;
+}
+
+.slide-view .counts {
+    position: absolute;
+    top: 5%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.slide-view .counts .value {
+    border-radius: 9px;
+    line-height: 18px;
+    padding: 0 6px;
+    font-size: 16px;
+    display: inline-block;
+    color: rgb(241, 241, 241);
+}
+
+.ui-loading {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin: -10px 0 0 -10px;
+    left: 50%;
+    top: 50%;
+}
+
+.loadInco {
+    position: relative;
+    width: 17px;
+    height: 21px;
+    vertical-align: -20%;
+}
+
+.blockG {
+    display: block;
+    position: absolute;
+    background-color: #ccc;
+    width: 2px;
+    height: 6px;
+    border-radius: 3px 3px 0 0;
+    -webkit-transform: scale(0.4);
+    -webkit-animation-name: fadeG;
+    -webkit-animation-duration: 0.48s;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes fadeG {
+    0% {
+        background-color: #8b8c8d;
+    }
+    100% {
+        background-color: #ccc;
+    }
+}
+
+#rotateG_01 {
+    left: 0;
+    top: 8px;
+    -webkit-animation-delay: 0.18s;
+    -webkit-transform: rotate(-90deg);
+}
+
+#rotateG_02 {
+    left: 2px;
+    top: 3px;
+    -webkit-animation-delay: 0.24s;
+    -webkit-transform: rotate(-45deg);
+}
+
+#rotateG_03 {
+    left: 8px;
+    top: 1px;
+    -webkit-animation-delay: 0.3s;
+    -webkit-transform: rotate(0deg);
+}
+
+#rotateG_04 {
+    right: 2px;
+    top: 3px;
+    -webkit-animation-delay: 0.36s;
+    -webkit-transform: rotate(45deg);
+}
+
+#rotateG_05 {
+    right: 0;
+    top: 8px;
+    -webkit-animation-delay: 0.42s;
+    -webkit-transform: rotate(90deg);
+}
+
+#rotateG_06 {
+    right: 2px;
+    bottom: 2px;
+    -webkit-animation-delay: 0.48s;
+    -webkit-transform: rotate(135deg);
+}
+
+#rotateG_07 {
+    bottom: 0;
+    left: 8px;
+    -webkit-animation-delay: 0.54s;
+    -webkit-transform: rotate(180deg);
+}
+
+#rotateG_08 {
+    left: 2px;
+    bottom: 2px;
+    -webkit-animation-delay: 0.6s;
+    -webkit-transform: rotate(-135deg);
+}
+
+.slideMenu {}
+
+body {
+    overflow: hidden;
+    position: relative;
+}
+
+.a_rela {
+    background: #000;
+}
+
+.a_album {
+    overflow: hidden;
+}
+
+.a_album ul {
+    float: left;
+}
+
+.a_over {
+    width: 100000px;
+    position: relative;
+    top: 0px;
+}
+
+.a_over li {
+    float: left;
+    height: 100%;
+    text-align: center;
+}
+
+.a_over li img {
+    max-width: 97%;
+    position: relative;
+    top: 20%;
+}
+
+.a_close {
+    background: url("images/a_back_fork.png") no-repeat right top;
+    background-size: 45px;
+    z-index: 999999;
+    width: 45px;
+    height: 45px;
+    top: 0;
+    right: 0;
+    opacity: .8;
+}
+
+.a_total {
+    height: 45px;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    line-height: 45px;
+    top: 0px;
+}
+
+.a_btn {
+    height: 52px;
+}
+
+.a_btn p {
+    float: left;
+    text-align: center;
+    line-height: 44px;
+    height: 44px;
+    padding: 8px 0 0;
+    box-sizing: border-box;
+}
+
+.a_btn p.act {
+    background: url("images/albumArrowUp.png") no-repeat center top;
+    background-size: 16px 8px;
+}
+
+.a_btn p a {
+    background: #1b1b1b;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    line-height: 44px;
+    color: #f1f1f1;
+}
+
+.a_btn p.act a {
+    background: #262626;
+    color: #fff;
+}
+
+.a_btn p span {
+    display: block;
+    line-height: 20px;
+    height: 40px;
+    color: #f2f2f3;
+}
+
+.tip {
+    position: fixed;
+    bottom: 62px;
+    left: 0;
+    z-index: 99989;
+    text-align: center;
+}
+
+.tip span {
+    color: #fff;
+}
+
+.tip i {
+    font-style: normal;
+    padding-left: 3px;
+}
+
+.tip b {
+    font-weight: normal;
+}
+
+.a_p_wrap {
+    bottom: 0;
+    position: relative;
+    height: 52px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+    z-index: 9999999;
+}
+
+.fadeOut {
+    opacity: .0;
+    -webkit-transition: all .3s ease-in-out;
+}

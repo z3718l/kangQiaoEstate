@@ -1,0 +1,194 @@
+body,
+dl,
+dd,
+ul,
+ol,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+blockquote,
+form,
+fieldset,
+legend,
+input,
+button,
+select,
+textarea {
+    margin: 0px;
+    padding: 0px;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+    display: block;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+    -webkit-appearance: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+html {}
+
+img {
+    vertical-align: top;
+    border: 0px none;
+}
+
+a,
+a:active,
+a:hover {
+    outline: none;
+}
+
+a:focus {
+    outline: dotted thin;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(102, 102, 102);
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+    vertical-align: middle;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clearfix::before,
+.clearfix::after {
+    content: '​';
+    display: block;
+    height: 0px;
+    overflow: hidden;
+}
+
+.clearfix::after {
+    clear: both;
+}
+
+body {
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: 'Microsoft YaHei', Helvetica, Arial, Verdana, sans-serif;
+    color: rgb(51, 51, 51);
+}
+
+body * {
+    box-sizing: content-box;
+}
+
+body {
+    background: rgb(240, 240, 240);
+}
+
+aside {
+    margin-bottom: 10px;
+}
+
+section a {
+    display: block;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+section a:active {
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+section img {
+    width: 100%;
+    max-width: 100%;
+    min-height: 160px;
+    -webkit-user-select: none;
+}
+
+section a span {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    left: 0px;
+    top: 30px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    min-width: 165px;
+    height: 45px;
+    font-size: 17px;
+    text-align: center;
+    line-height: 45px;
+    background: rgba(51, 51, 51, 0.85098);
+}
+
+.a_img {
+    padding: 5px;
+    margin: 5px;
+    background: rgb(255, 255, 255);
+}
+
+.a_title_left,
+.a_title_right {
+    position: absolute;
+    width: 100%;
+    height: 41px;
+    bottom: 6px;
+}
+
+.a_title_left {
+    background: url(http://ydxs.myscrm.cn/Apps/Estate/View/default/InSaleProjects/img/triangle_left.png) 0% 0% / 5px 40px no-repeat;
+}
+
+.a_title_right {
+    bottom: 0px;
+    background: url(http://ydxs.myscrm.cn/Apps/Estate/View/default/InSaleProjects/img/triangle_right.png) 100% 0% / 5px 40px no-repeat;
+}
+
+.a_title_right p {
+    opacity: 0.85;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 30px;
+    width: 100%;
+    height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: rgb(51, 204, 102);
+}

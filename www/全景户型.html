@@ -1,0 +1,576 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>全景户型</title>
+    <script>
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('hideToolbar');
+        });
+    </script>
+    <link href="Public/myui_v1/css/mysoft_panoramic.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="Apps/Estate/View/defaultPublic/vhouse/jQuery.js"></script>
+    <!-- <script type="text/javascript" src="Public/myui_v1/js/iscroll.js"></script>
+-->
+    <script type="text/javascript">
+        // var myScroll;
+        // function loaded() {
+        // 	myScroll = new iScroll('wrapper_page_iscroll_');
+        // }
+
+        //  document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        //  document.addEventListener('DOMContentLoaded', loaded, false);
+        function hxHideOrShow(id) {
+
+            //控制滚动效果与点击效果出发有效时间
+            // var isclick=$("#show"+id).attr("isclick");
+            // if(isclick==1){
+            //     return;
+            // }
+            // $("#show"+id).attr("isclick","1");
+            // setTimeout(function(){$("#show"+id).attr("isclick","0");},500);
+
+            var show = $("#show" + id).attr("show");
+            if (show == 1) {
+
+                $("#show" + id).attr("show", "0");
+                $("#hx_" + id).hide();
+                document.getElementById("img_" + id).src = 'Public/myui_v1/images/Estate/view_list_focus.png';
+                $("#itemli" + id).css("border-bottom", "1px solid #ddd");
+
+                var liPdiv = $("#itemli" + id).parent("div");
+                //   alert($(liPdiv).attr("id"));
+                var lastId = $("li:last", liPdiv).attr("id");
+                var lastid_str = "itemli" + id;
+                //   alert(lastId +" ==" + lastid_str);
+
+                if (lastId == lastid_str) {
+
+                } else {
+                    $("#itemli" + id).css("border-bottom", "1px solid #ddd");
+                }
+
+            } else {
+                $("#show" + id).attr("show", "1");
+                $("#hx_" + id).show();
+                document.getElementById("img_" + id).src = 'Public/myui_v1/images/Estate/view_list_default.png';
+                $("#itemli" + id).css("border", "none");
+            }
+            //更新滚动条效果
+            // myScroll.refresh();
+
+            var last_data_ = $("#last_data_").val();
+            if (id == last_data_) {
+                //判断是当前列表高度，是否高于了当前屏幕高度
+                var windowHeight = window.innerHeight;
+                var liHeight = $("#thelist_page_iscroll_").height();
+                if (liHeight > windowHeight) {
+                    //如果是最后一条记录，则向上滚动60 px 
+                    // $("#wrapper_page_iscroll_").animate({ scrollTop: $("#thelist_page_iscroll_").height() }, 500);
+                    $("body,html").animate({
+                        scrollTop: $(document).height()
+                    }, 1000);
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!--    <div id="PanoramicApartment_topnav_main">
+<div id='PanoramicApartment_topnav'>
+<ul>
+<li class="current" onclick="goUrl('/Estate/HouseType/PanoramicApartment?token=tdyajl1427723483')">全部</li>
+<li onclick="goUrl('/Estate/HouseType/PanoramicMyFav?token=tdyajl1427723483')">我的收藏</li>
+</ul>
+</div>
+</div>-->
+    <style>
+        .p_showchoies_td .item_ {
+            padding-top: 6px;
+            line-height: 59px;
+            font-size: 14px;
+        }
+    </style>
+    <div id="wrapper_page_iscroll_" style="top: 0px; bottom: 24px;margin-bottom: 10px">
+        <div id="scroller_page_iscroll_" class="scroller_page_iscroll_">
+            <ul id="thelist_page_iscroll_">
+                <li class="panoram_list_title" rel='0'>
+                    <span class="text_" style="max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">林溪湾-赤金双拼</span>
+                </li>
+                <div id='id0' id="showList_content_">
+                    <li id="itemli39cf7fd6-367d-4c29-6c5c-3abd77c423a4" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fd6-367d-4c29-6c5c-3abd77c423a4" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fd6-367d-4c29-6c5c-3abd77c423a4')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd6-367d-4c29-6c5c-3abd77c423a4');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">负一层 </p>
+                                    <p class="text_black_title_desc">户型：A3-n &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd6-367d-4c29-6c5c-3abd77c423a4');" style="text-align:right; padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">347.55㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fd6-367d-4c29-6c5c-3abd77c423a4');">
+                                    <img width="15" id='img_39cf7fd6-367d-4c29-6c5c-3abd77c423a4' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fd6-367d-4c29-6c5c-3abd77c423a4' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fd7-4c39-2343-e9b5-034911e583a6" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fd7-4c39-2343-e9b5-034911e583a6" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fd7-4c39-2343-e9b5-034911e583a6')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow('39cf7fd7-4c39-2343-e9b5-034911e583a6');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">一层 </p>
+                                    <p class="text_black_title_desc">户型：A3-n &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd7-4c39-2343-e9b5-034911e583a6');" style="text-align:right; padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">347.55㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fd7-4c39-2343-e9b5-034911e583a6');">
+                                    <img width="15" id='img_39cf7fd7-4c39-2343-e9b5-034911e583a6' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fd7-4c39-2343-e9b5-034911e583a6' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />                                                户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">二层 </p>
+                                    <p class="text_black_title_desc">户型：A3-n &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">347.55㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0');">
+                                    <img width="15" id='img_39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fd7-cdd0-2b4b-ec99-bbe654d232f0' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />                                                户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">负一层 </p>
+                                    <p class="text_black_title_desc">户型：A3-s &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">354.87㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58');">
+                                    <img width="15" id='img_39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fd8-e20a-fb00-5c6c-d9e7ce7f7c58' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />                                                户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e" style="display:none;" class="li_none">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">一层 </p>
+                                    <p class="text_black_title_desc">户型：A3-s &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">354.87㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e');">
+                                    <img width="15" id='img_39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fd9-54d4-7f80-ed07-bcf7fcd79a1e' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />                                                户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fd9-c87c-49d3-5762-b7e9125b9f0b" style="display:none;" class="li_none">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fd9-c87c-49d3-5762-b7e9125b9f0b" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fd9-c87c-49d3-5762-b7e9125b9f0b')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd9-c87c-49d3-5762-b7e9125b9f0b');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">二层 </p>
+                                    <p class="text_black_title_desc">户型：A3-s &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fd9-c87c-49d3-5762-b7e9125b9f0b');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">354.87㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fd9-c87c-49d3-5762-b7e9125b9f0b');">
+                                    <img width="15" id='img_39cf7fd9-c87c-49d3-5762-b7e9125b9f0b' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fd9-c87c-49d3-5762-b7e9125b9f0b' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />                                                户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                </div>
+                <li rel="0" class='loadmore' onClick="show_hide(this, '0')" style=" display:block; border-bottom:none;border-top:none; line-height:20px; height:30px; text-align:center;">
+                    <img width="20" style="vertical-align: sub; margin-top:10px;" src='Public/myui_v1/images/Estate/icon_down_default.png' />
+                </li>
+                <li class="panoram_list_title" rel='1'>
+                    <span class="text_" style="max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">林溪湾-天阔联排</span>
+                </li>
+                <div id='id1' id="showList_content_">
+                    <li id="itemli39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">三层 </p>
+                                    <p class="text_black_title_desc">户型：D4-N &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">289.38㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1');">
+                                    <img width="15" id='img_39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png' />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fdc-bf89-c88e-2369-ab0ec7cf7ca1' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />                                                户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">负一层 </p>
+                                    <p class="text_black_title_desc">户型：D4-N &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">289.38㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4');">
+                                    <img width="15" id='img_39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fdd-3b73-ab1b-c134-8e3c1c0a5ef4' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fdd-b669-8db7-49f6-409dd7eb5e70" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fdd-b669-8db7-49f6-409dd7eb5e70" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fdd-b669-8db7-49f6-409dd7eb5e70')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fdd-b669-8db7-49f6-409dd7eb5e70');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">二层 </p>
+                                    <p class="text_black_title_desc">户型：D4-N &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fdd-b669-8db7-49f6-409dd7eb5e70');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">289.38㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fdd-b669-8db7-49f6-409dd7eb5e70');">
+                                    <img width="15" id='img_39cf7fdd-b669-8db7-49f6-409dd7eb5e70' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fdd-b669-8db7-49f6-409dd7eb5e70' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />                                                户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                    <li id="itemli39cf7fde-4e28-42f6-2574-8bdf9d3fade3" style="display:block;">
+                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:auto;">
+                            <tr style="height:60px;" show="0" id="show39cf7fde-4e28-42f6-2574-8bdf9d3fade3" isclick='0'>
+                                <td style="text-align:center;width:48px;" onClick="Favorite_CurRecord(this,'39cf7fde-4e28-42f6-2574-8bdf9d3fade3')">
+                                    <a style="border-right:1px dotted #8e8e8e;padding:3px 15px 3px 10px;display:inline-block;"><img width="22" src='Public/myui_v1/images/Estate/Favorite_no_w.png' /></a>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fde-4e28-42f6-2574-8bdf9d3fade3');" style="padding:10px 0 7px 10px;">
+                                    <p class="text_blue_title_p">一层 </p>
+                                    <p class="text_black_title_desc">户型：D4-N &nbsp;&nbsp;</p>
+                                </td>
+                                <td onClick="hxHideOrShow( '39cf7fde-4e28-42f6-2574-8bdf9d3fade3');" style="text-align:right;padding-right:12px;padding-top:4px;">
+                                    <p class="text_blue_title_p">289.38㎡</p>
+                                    <p class="text_black_title_desc">&nbsp;</p>
+                                </td>
+                                <td style="text-align:left;width:21px;" onClick="hxHideOrShow('39cf7fde-4e28-42f6-2574-8bdf9d3fade3');">
+                                    <img width="15" id='img_39cf7fde-4e28-42f6-2574-8bdf9d3fade3' style="vertical-align:sub; margin-right:5px;" src='Public/myui_v1/images/Estate/view_list_focus.png'
+                                    />
+                                </td>
+                            </tr>
+                            <tr id='hx_39cf7fde-4e28-42f6-2574-8bdf9d3fade3' style="display:none;background-color:rgb(246,246,246);">
+                                <td colspan="4" class="p_showchoies_td_2">
+                                    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="item_" onClick="goUrl('户型图.html')">
+                                                <img style="vertical-align:sub; margin-right:12px;" src='Public/myui_v1/images/Estate/view_icon_pic.png' />户型图
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="hidden" id="last_data_" value="39cf7fde-4e28-42f6-2574-8bdf9d3fade3" />
+                        <a style="display:none;" id="last_data"></a>
+                    </li>
+                </div>
+                <li rel="0" class='loadmore' onClick="show_hide(this, '1')" style=" display:none; border-bottom:none; border-top:none; line-height:20px; height:30px; text-align:center;">
+                    <img width="20" style="vertical-align: sub; margin-top:10px;" src='Public/myui_v1/images/Estate/icon_down_default.png' />
+                </li>
+            </ul>
+            <div id="golast"></div>
+        </div>
+    </div>
+    <style>
+        .powered {
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: #aaa;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .powered a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .powered a:hover,
+        .powered a:visited {
+            color: #aaa;
+        }
+        
+        .powered a:active {
+            color: #2caf56;
+        }
+    </style>
+    <div class="powered" id="powered">
+        Powered&nbsp;by&nbsp;&nbsp;<a href="http://m.myunke.com/">明源云客</a>
+    </div>
+    <!--<div id="liok" style="width: 100%; height: 100%;"></div>-->
+    <img src="Public/myui_v1/images/loading_small.gif" style="display: none;" />
+    <script type="text/javascript">
+        function show_hide(obj, id) {
+            var rel = $(obj).attr("rel");
+            if (rel == "0") {
+                $(".li_none", "#id" + id).show();
+                $(obj).attr("rel", "1");
+                $('img', obj).attr('src', 'Public/myui_v1/images/Estate/icon_down_focus.png');
+            } else {
+                $(".li_none", "#id" + id).hide();
+                $(obj).attr("rel", "0");
+                $('img', obj).attr('src', 'Public/myui_v1/images/Estate/icon_down_default.png');
+            }
+        }
+
+        function goUrl(url) {
+            window.location.href = url;
+        }
+
+        function Favorite_CurRecord(obj, id) {
+            var token = "tdyajl1427723483";
+            var islogin = "";
+            var isdemo = "";
+            if (islogin == '0') {
+                if (isdemo === "1") {
+                    window.location.href =
+                        "http://www.myscrm.cn?g=ApplibWap&m=Demo&a=newlogin&token=tdyajl1427723483&isreturn=1&openid=";
+                } else {
+                    window.location.href =
+                        " http://www.myscrm.cn?g=ApplibWap&m=Sales&a=newlogin&token=tdyajl1427723483&isreturn=1&openid=";
+                }
+                return;
+            }
+
+            var submitData = {
+                token: " tdyajl1427723483",
+                lpguid: $("#lpguid").val(),
+                proj: "e807f035-bc0b-40c0-942a-08f9639bd253",
+                fans_id: "",
+                hxid: id
+            };
+            var oldImgPath = $('img', obj).attr('src');
+            $('img', obj).attr('src', 'Public/myui_v1/images/loading_small.gif');
+            $(obj).attr('disabled', 'disabled');
+            $.post("/Estate/HouseType/addFav?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253",
+                submitData,
+                function (data) {
+                    $(obj).removeAttr('disabled');
+                    var backdata = eval('(' + data + ')');
+                    if (backdata.errno == 0) {
+                        if (backdata.ok == 1) {
+                            $('img', obj).attr('src', 'Public/myui_v1/images/Estate/Favorite_ok.png');
+                        } else {
+                            $('img', obj).attr('src', 'Public/myui_v1/images/Estate/Favorite_no_w.png');
+                        }
+                    } else {
+                        $('img', obj).attr('src', oldImgPath);
+                        alert(backdata.msg);
+                        if (backdata.backUrl) {
+                            window.location.href = backdata.backUrl;
+                        }
+
+                    }
+                });
+        }
+
+        function Cancel_Favorite_CurRecord(obj, id) {
+            var submitData = {
+                openid: "",
+                token: "tdyajl1427723483",
+                lpguid: $("#lpguid").val(),
+                truename: $("#truename").val(),
+                tel: $("#tel").val()
+            };
+            var oldImgPath = $('img', obj).attr('src');
+            $.post("/Estate/HouseType/addFav?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253",
+                submitData,
+                function (data) {
+                    var backdata = eval('(' + data + ')');
+                    if (backdata.errno == 0) {
+                        $('img', obj).attr('src', 'Public/myui_v1/images/Estate/Favorite_ok.png');
+                    } else {
+
+                        $('img', obj).attr('src', oldImgPath);
+                        alert(backdata.msg);
+
+                    }
+                });
+        }
+
+        function showorhide(obj) {
+            var rel = $(obj).attr('rel');
+            $("#id" + rel).slideToggle();
+            //$(obj).toggleClass("main");
+        }
+        $(function () {
+            $('#wrapper_page_iscroll_').css('min-height', document.body.clientHeight - 30);
+            $("#thelist_page_iscroll_ div:first li:first tr:eq(1)").show();
+            $("#thelist_page_iscroll_ div:first li:first").css("border-bottom", "none");
+            $("#thelist_page_iscroll_ div:first li:first tr:eq(0)").attr("show", "1");
+            $("#thelist_page_iscroll_ div:first li:first tr:eq(0) td:last img").attr('src',
+                'Public/myui_v1/images/Estate/view_list_default.png');
+        });
+    </script>
+</body>
+
+</html>

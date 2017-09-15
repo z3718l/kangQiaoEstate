@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>微楼书</title>
+    <link rel="stylesheet" type="text/css" href="Apps/Estate/View/citynight/Index/css/style.css" />
+</head>
+
+<body>
+    <section id="section">
+        <div class="a_bg">
+            <img id="img" src="Apps\Estate\View\citynight\Index\images/bg.jpg" />
+        </div>
+        <ul>
+            <li class="clearfix">
+                <a href="楼盘详情.html">楼盘详情</a>
+            </li>
+            <li class="clearfix">
+                <a href="全景户型.html">全景户型</a>
+            </li>
+            <li class="clearfix">
+                <a href="项目图册.html">项目图册</a>
+            </li>
+            <li class="clearfix">
+                <a href="预约看房.html">预约看房</a>
+            </li>
+            <li class="clearfix">
+                <a href="房贷计算器.html">房贷计算器</a>
+            </li>
+        </ul>
+    </section>
+</body>
+<script type="text/javascript">
+    //背景图片平铺
+    var sec = document.getElementById('section');
+    var img = document.getElementById('img');
+    var a = document.getElementsByTagName('a'),
+        i = 0;
+    sec.style.height = document.documentElement.clientHeight + 'px';
+    img.style.height = document.documentElement.clientHeight + 'px';
+    img.style.width = document.documentElement.clientWidth + 'px';
+    //去掉手机聚焦时的默认样式
+    for (; i < a.length; a++) {
+        a[i].addEventListener('touchstart', function (e) {
+            e.stopPropagation
+        }, false);
+    }
+</script>
+
+</html>

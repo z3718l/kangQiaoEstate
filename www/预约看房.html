@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="Public/myui_v1/css/mysoft_public.css" />
+    <link rel="stylesheet" type="text/css" href="Public/myui_v1/css/base.css" />
+    <title>预约看房</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        
+        .tc .name {
+            font-size: 16px;
+            font-weight: bold;
+            height: 25px;
+            line-height: 25px;
+            color: #222222;
+            margin-top: 12px;
+        }
+        
+        .tc .sex {
+            font-size: 16px;
+            font-weight: bold;
+            height: 45px;
+            line-height: 45px;
+            color: #222222;
+        }
+        
+        .tc input {
+            outline: none;
+            height: 35px;
+            line-height: 35px;
+        }
+        
+        .mysubmit {
+            width: 125px;
+            height: 35px;
+            font-size: 20px;
+            color: #FFF;
+            line-height: 35px;
+            border-radius: 10px;
+            background: rgb(119, 187, 119);
+            border: none;
+            margin: auto;
+            outline: none;
+            text-align: center;
+        }
+        
+        #postfform {
+            margin-bottom: 0px;
+        }
+        
+        .container {
+            margin: 12px 12px 0px 12px;
+        }
+        
+        form .form-group {
+            background: #fff;
+            padding: 7px 12px;
+            display: block;
+            width: auto;
+            margin: 0;
+        }
+        
+        form .form-group label {
+            margin: 0;
+            line-height: 28px;
+        }
+        
+        form .form-group .form-control {
+            height: 20px;
+            top: 12px;
+        }
+        
+        form .form-group .form_dl {
+            padding-right: 50px;
+        }
+        
+        .form_dl dl {
+            margin: 12px 0 0;
+        }
+        
+        form .form-group dl.clearfix {
+            padding-right: 10px;
+        }
+        
+        .form_dl dt {
+            float: left;
+            padding-right: 12px;
+        }
+        
+        .form_dl dt img {
+            display: block;
+        }
+        
+        .form_dl dd {
+            margin: 0;
+            padding: 0;
+            color: #6a6a6a;
+        }
+        
+        .form_dl dd i {
+            font-style: normal;
+            color: #333;
+        }
+        
+        .form_dl dd p {
+            padding: 5px 0 0;
+            margin: 0;
+            font-size: 12px;
+        }
+        
+        .slogan {
+            text-align: center;
+        }
+        
+        .slogan img {
+            max-width: 100%;
+        }
+        
+        .btn-block {
+            margin-top: 30px;
+        }
+        
+        .form-control input {
+            padding: 0;
+        }
+        
+        form .form-group label.sex {
+            background: url("Apps/Sales/View/default/Public/images/select_empty@2x.png") no-repeat left center;
+            background-size: 22px;
+            width: auto;
+            padding: 3px 26px 0 28px;
+        }
+        
+        form .form-group label.act {
+            background: url("Apps/Sales/View/default/Public/images/select_full@2x.png") no-repeat left center;
+            background-size: 22px;
+        }
+        
+        form .form-group input[type="checkbox"] {
+            display: none;
+        }
+        
+        .form-control ul.checkbox li {
+            top: -5px;
+        }
+        
+        form .form-group .form-control {
+            left: 88px;
+        }
+        
+        form .form-group label {
+            width: 75px;
+        }
+        
+        .errpanel {
+            position: absolute;
+            background: url("Apps/Sales/View/default/Public/images/icon_wrong.png") no-repeat center top;
+            background-size: 57px;
+            height: 110px;
+            width: 100%;
+            text-align: center;
+            color: #333;
+            font-size: 16px;
+            top: 50%;
+            margin-top: -55px;
+            text-align: center;
+        }
+        
+        .errpanel .errortext {
+            margin-top: 77px;
+        }
+        
+        form .form-group input.getcode {
+            width: 96px;
+            height: 36px;
+            line-height: 36px;
+            font-size: 15px;
+            background-color: #cacaca;
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+            position: absolute;
+        }
+        
+        #divCodePanel .inputcode,
+        #divCodePanel .btncode {
+            float: left;
+            overflow: hidden;
+        }
+        
+        form #divCodePanel.form-group .form-control {
+            padding-right: 0px;
+        }
+        
+        #txtCode {
+            width: 100px;
+        }
+        
+        #divCodePanel .btncode {
+            position: relative;
+            height: 43px;
+            width: 100px;
+            top: -9px;
+        }
+        
+        .successpanel {
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            left: 0px;
+            height: 100%;
+            ;
+            background-color: #fff;
+            z-index: 99999;
+            display: none;
+        }
+        
+        .successpanel .successtip {
+            background: url("Apps/Sales/View/default/Public/images/successright.png") no-repeat center top;
+            background-size: 57px 57px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: -40px;
+            width: 100px;
+            text-align: center;
+            font-size: 15px;
+            color: #333;
+            ;
+            padding-top: 62px;
+        }
+        
+        .successpanel .yuyuepanel {
+            position: absolute;
+            bottom: 60px;
+            left: 12px;
+            right: 12px;
+            -webkit-box-sizing: border-box;
+        }
+        
+        .successpanel .yuyuepanel .btn-block {
+            margin-top: 0px;
+        }
+        
+        .error {
+            background-color: #fff;
+            padding: 5px 12px;
+        }
+    </style>
+</head>
+
+<body onselectstart="return true;" ondragstart="return false;" id="onlinebooking" style="background: #f0f0f0; ">
+    <div id="minpanel">
+        <div class="slogan">
+            <img src="Apps/Sales/View/default/Public/images/slogan.png" />
+        </div>
+        <input type="hidden" id="fans_id" value="" />
+        <div class="container">
+            <div class="form-group" style="font-size: 13px; border: none; padding: 0 0 5px;">
+                请留下您的联系方式，我们会安排专人与您联系。
+            </div>
+            <div class="form-group" style="font-size: 13px; border: none; padding: 0 0 16px;">
+                以下信息会为您注册个人专属账户，请确保信息准确性。
+            </div>
+            <form id="postfform">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <div class="form-control">
+                        <input type="text" tableName="s_lpyykf" id="cst_name" name="cst_name" placeholder="请输入姓名" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>手机</label>
+                    <div class="form-control">
+                        <input type="tel" tableName="s_lpyykf" id="mobile_tel" name="mobile_tel" placeholder="请输入手机" value="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>性别</label>
+                    <div class="form-control">
+                        <ul class="checkbox" tableName="s_lpyykf" for="gender" value="">
+                            <li style="top:-6px;" value="0">男</li>
+                            <li style="top:-6px;" value="1">女</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>看房时间</label>
+                    <div class="form-control">
+                        <input class="date nexttime" type="text" data-range="1900-2100" readonly tableName="s_lpyykf" name="qwkfdate" id="qwkfdate"
+                            placeholder="请输入看房时间" value="" />
+                    </div>
+                </div>
+                <button type="button" id="saveBtn" onclick="mysubmit(this)" class="btn btn-block">确 认</button>
+                <input type="hidden" name="__hash__" value="f70b1fa33e70d9b2f6814982da5941b9_562691373312ccbd3df94b59cb6ee7fe">
+            </form>
+        </div>
+    </div>
+    <div class="successpanel" id="successpanel">
+        <div class="successtip">预约成功！</div>
+        <div class="yuyuepanel">
+            <div id="newlocal" class="btn btn-block">查看预约</div>
+        </div>
+        <style>
+            .powered {
+                margin-bottom: 6px;
+                font-size: 11px;
+                color: #aaa;
+                text-align: center;
+                width: 100%;
+            }
+            
+            .powered a {
+                color: #aaa;
+                text-decoration: none;
+            }
+            
+            .powered a:hover,
+            .powered a:visited {
+                color: #aaa;
+            }
+            
+            .powered a:active {
+                color: #2caf56;
+            }
+        </style>
+        <div class="powered" id="powered">
+            Powered&nbsp;by&nbsp;&nbsp;<a href="http://m.myunke.com/">明源云客</a>
+        </div>
+    </div>
+    <style>
+        .powered {
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: #aaa;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .powered a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .powered a:hover,
+        .powered a:visited {
+            color: #aaa;
+        }
+        
+        .powered a:active {
+            color: #2caf56;
+        }
+    </style>
+    <div class="powered" id="powered">
+        Powered&nbsp;by&nbsp;&nbsp;<a href="http://m.myunke.com/">明源云客</a>
+    </div>
+    <script src="Public/dest/base.min.js"></script>
+    <script src="Public/jquery/jquery.min.js"></script>
+    <script src="Public/myui_v1/js/ui.js"></script>
+    <style type="text/css" class="dateinput">
+        .date-input-wrap {
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            font-family: sans-serif;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+        }
+        
+        .date-input-wrap .center {
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            width: 100%;
+        }
+        
+        .date-input-wrap .title {
+            height: 60px;
+            text-align: left;
+            line-height: 60px;
+            color: #3c6;
+            font-size: 18px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .date-input-wrap .title-icon {
+            display: inline-block;
+            margin: -2px 8px 0px 15px;
+            vertical-align: middle;
+            height: 24px;
+            width: 24px;
+            -webkit-background-size: 24px 24px;
+            background-image: url(Apps/Sales/View/default/Public/images/title-icon.png);
+        }
+        
+        .date-input-wrap .title>span:last-child {
+            padding-left: 8px;
+        }
+        
+        .date-input-wrap .wrap {
+            width: 288px;
+            border: 2px solid #777;
+            margin: -144px auto 0;
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .date-input-wrap .content {
+            width: 252px;
+            height: 178px;
+            margin: 0 auto;
+            white-space: nowrap;
+            font-size: 0;
+        }
+        
+        .date-input-wrap .content .iscroll-wrap {
+            display: inline-block;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            width: 76px;
+            height: 178px;
+            width: 33%;
+            position: relative;
+        }
+        
+        .date-input-wrap .content .iscroll-wrap:nth-child(2) {
+            width: 34%;
+        }
+        
+        .date-input-wrap .content .iscroll-wrap:after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+            top: 0px;
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(10%, rgba(255, 255, 255, 1)), color-stop(38%, rgba(255, 255, 255, 0)), color-stop(62%, rgba(255, 255, 255, 0)), color-stop(90%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(255, 255, 255, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, 1) 90%, rgba(255, 255, 255, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0) 62%, rgba(255, 255, 255, 1) 90%, rgba(255, 255, 255, 1) 100%);
+            /* W3C */
+        }
+        
+        .date-input-wrap .iscroll {
+            position: absolute;
+            left: 8px;
+            top: 10px;
+            right: 8px;
+            height: 156px;
+            overflow: hidden;
+        }
+        
+        .date-input-wrap .buttons {
+            border-top: 1px solid #ddd;
+        }
+        
+        .date-input-wrap .date-btn {
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            padding: 2px;
+            color: #3c6;
+        }
+        
+        .date-input-wrap .date-btn.active {
+            background-color: #d9d9d9;
+        }
+        
+        .date-input-wrap .date-btn span {
+            display: block;
+            height: 40px
+        }
+        
+        .date-input-wrap ul {
+            padding: 0px 0 52px 0;
+            text-align: center;
+            margin: 0;
+        }
+        
+        .date-input-wrap li {
+            list-style: none;
+            line-height: 52px;
+            height: 52px;
+            font-size: 18px;
+            color: #fff;
+            z-index: 2;
+            color: #333;
+        }
+        
+        .date-input-wrap .content .iscroll:before,
+        .date-input-wrap .content .iscroll:after {
+            content: "";
+            position: absolute;
+            top: 33%;
+            left: 8px;
+            right: 8px;
+            height: 2px;
+            background-color: #3c6;
+        }
+        
+        .date-input-wrap .content .iscroll:after {
+            top: 66%;
+        }
+    </style>
+    <script class="datainput">
+        (function ($) {
+            var clicklock = 0;
+            $.fn.dateinput = function (opt) {
+                var me = $(this),
+                    range = {},
+                    ori_time = {},
+                    cur_time = {},
+                    get_day = new Date().getDate(),
+                    scrollid;
+                var html =
+                    '<div class="date-input-wrap" id="date-input-wrap"><div class="center">\
+                        <div class="wrap">\
+                                <div class="title"><span class="title-date"><span class="title-icon"></span><span id="cur-year"></span>-<span id="cur-month"></span>-<span id="cur-day"></span></span><span id="cur-week"></span></div>\
+                        <div class="content">\
+                                <div class="iscroll-wrap">\
+                                <div class="year iscroll" id="date-year" targ="#cur-year"></div>\
+                        </div>\
+                        <div class="iscroll-wrap">\
+                                <div class="month iscroll" id="date-month" targ="#cur-month"></div>\
+                        </div>\
+                        <div class="iscroll-wrap">\
+                                <div class="day iscroll" id="date-day" targ="#cur-day"></div>\
+                        </div>\
+                        </div>\
+                        <div class="buttons">\
+                                <div class="sure date-btn" data-ac="active"><span>确&nbsp;定</span></div>\
+                        </div>\
+                        </div>\
+                        </div></div>';
+                me.bind("click", function () {
+                    if (clicklock) return;
+                    clicklock = 1;
+                    //使所有文本框失去焦点(解决输入法没有关闭时，点击时间控件页面错位bug)
+                    $('input').blur();
+                    setTimeout(function () {
+                        getRange();
+                        var panel = $(html);
+                        $("body").append(panel);
+                        getCurtime();
+                        start(cur_time.year, cur_time.month, cur_time.day);
+                        $("#date-input-wrap .buttons .current").bind("click", function () {
+                            cur_time = {};
+                            start();
+                        });
+                        $("#date-input-wrap .buttons .sure").bind("click", function () {
+                            me.val($("#date-input-wrap .title-date").text());
+                            setTimeout(function () {
+                                panel.remove();
+                            }, 100);
+                            if (ori_time.year != cur_time.year || ori_time.month !=
+                                cur_time.month || ori_time.day != cur_time.day) {
+                                me.trigger("change");
+                            }
+                        });
+                        $("#date-input-wrap").bind("click", function () {
+                            setTimeout(function () {
+                                panel.remove();
+                            }, 100);
+                        });
+                        $("#date-input-wrap .wrap").bind("click", function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        });
+                        clicklock = 0;
+                    }, 300);
+                });
+
+                function getCurtime() {
+                    if (me.val()) {
+                        var time = me.val().split("-");
+                    }
+                    ori_time["year"] = cur_time["year"] = time && parseInt(time[0], 10);
+                    ori_time["month"] = cur_time["month"] = time && parseInt(time[1], 10);
+                    ori_time["day"] = cur_time["day"] = time && parseInt(time[2], 10);
+                }
+
+                function getRange() {
+                    range = {};
+                    var ran = me.attr("data-range").split("-");
+                    if (ran.length < 2) {
+                        ran = ["1900", "2100"]
+                    };
+                    range["start"] = $.map(ran[0] && ran[0].split("/"), function (item, ind) {
+                        return parseInt(item, 10)
+                    });
+                    range["end"] = $.map(ran[1] && ran[1].split("/"), function (item, ind) {
+                        return parseInt(item, 10)
+                    });
+                }
+
+                function start() {
+                    var iscroll_year = init_year();
+                    var iscroll_month = init_month();
+                    var iscroll_day = init_day();
+                    setweek();
+                }
+
+                function onscrollend() {
+                    var wrapper = $(this.wrapper);
+                    var value = getCurNum(this);
+                    if (wrapper.hasClass("year")) {
+                        cur_time["year"] = parseInt(value, 10);
+                        init_month();
+                        setTimeout(init_day, 20);
+                    } else if (wrapper.hasClass("month")) {
+                        cur_time["month"] = parseInt(value, 0);
+                        setTimeout(init_day, 20);
+                    } else if (wrapper.hasClass("day")) {
+                        cur_time["day"] = parseInt(value, 10);
+                    }
+                    setweek();
+                }
+
+                function setweek() {
+                    var arr = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+                    var date = new Date(cur_time.year, cur_time.month - 1, cur_time.day);
+                    var week = arr[date.getDay()];
+                    $("#cur-week").text(week);
+                }
+
+                function getCurNum(iscroll) {
+                    var wrapper = $(iscroll.wrapper),
+                        cur_y = iscroll.y,
+                        dy = wrapper.find("li").height(),
+                        dom_tag = $(wrapper.attr("targ"));
+                    var ind = Math.round(Math.abs(cur_y) / dy),
+                        value = wrapper.find("li").eq(ind + 1).text();
+                    setTimeout(function () {
+                        dom_tag.text(value)
+                    }, 30);
+                    return value;
+                }
+
+                function init_year() {
+                    var tmp = $("<ul><li class='pad'></li></ul>");
+                    var cur_year = cur_time.year || new Date().getFullYear();
+                    for (var i = range.start[0]; i <= range.end[0]; i++) {
+                        tmp.append($("<li val=" + i + ">" + i + "</li>"));
+                    }
+                    $("#date-input-wrap #date-year").html(tmp);
+                    var iscroll_year = new iScroll("date-year", {
+                        hScrollbar: false,
+                        vScrollbar: false,
+                        snap: "li",
+                        useTransition: true,
+                        onTouchEnd: onscrollend
+                    });
+                    var scrollDom = $(iscroll_year.wrapper).find("li[val='" + cur_year + "']").prev();
+                    cur_time.year = cur_year;
+                    scrollDom.size() && iscroll_year.scrollToElement(scrollDom[0], 0);
+                    getCurNum(iscroll_year);
+                    return iscroll_year;
+                }
+
+                function init_month() {
+                    var tmp = $("<ul><li class='pad'></li></ul>");
+                    var cur_month = cur_time.month || new Date().getMonth() + 1;
+                    var floor = 1,
+                        ceil = 12;
+                    if (cur_time.year == range.start[0] && !!range.start[1]) {
+                        floor = range.start[1];
+                    }
+                    if (cur_time.year == range.end[0] && !!range.end[1]) {
+                        ceil = range.end[1];
+                    }
+                    for (var i = floor; i <= ceil; i++) {
+                        var num = i < 10 ? "0" + i : i;
+                        tmp.append($("<li val=" + i + ">" + num + "</li>"));
+                    }
+                    $("#date-input-wrap #date-month").html(tmp);
+                    var iscroll_month = new iScroll("date-month", {
+                        hScrollbar: false,
+                        vScrollbar: false,
+                        snap: "li",
+                        useTransition: true,
+                        onTouchEnd: onscrollend
+                    });
+                    var scrollDom = $(iscroll_month.wrapper).find("li[val='" + cur_month + "']").prev();
+                    cur_time.month = cur_month;
+                    scrollDom.size() && iscroll_month.scrollToElement(scrollDom[0], 0);
+                    getCurNum(iscroll_month);
+                    return iscroll_month;
+                }
+
+                function init_day() {
+                    var arr_day = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+                        year = cur_time.year || new Date().getFullYear(),
+                        cur_day = cur_time.day || new Date().getDate(),
+                        cur_month = cur_time.month || new Date().getMonth();
+                    if (year % 4 == 0 && year % 100 != 0) {
+                        arr_day[1] = 29;
+                    }
+                    var num_day = arr_day[cur_month - 1];
+                    var floor = 1,
+                        ceil = num_day;
+                    if (cur_time.year == range.start[0] && cur_time.month == range.start[1]) {
+                        floor = range.start[2] || floor;
+                    }
+                    if (cur_time.year == range.end[0] && cur_time.month == range.end[1]) {
+                        ceil = range.end[2] || num_day;
+                    }
+                    var tmp = $("<ul><li class='pad'></li></ul>");
+                    for (var i = floor; i <= ceil; i++) {
+                        var num = i < 10 ? "0" + i : i;
+                        tmp.append($("<li val=" + i + ">" + num + "</li>"));
+                    }
+                    $("#date-input-wrap #date-day").html(tmp);
+                    var iscroll_day = new iScroll("date-day", {
+                        hScrollbar: false,
+                        vScrollbar: false,
+                        snap: "li",
+                        useTransition: true,
+                        onTouchEnd: onscrollend
+                    });
+                    var scrollDom = $(iscroll_day.wrapper).find("li[val='" + cur_day + "']").prev();
+                    cur_time.day = cur_day;
+                    scrollDom.size() && iscroll_day.scrollToElement(scrollDom[0], 10);
+                    getCurNum(iscroll_day);
+                }
+            }
+            $(function () {
+                $("input[type=text][data-range]").each(function (dom, ind) {
+                    $(this).dateinput();
+                });
+            });
+        })(Zepto);
+    </script>
+    <style>
+        /*弹出框效果*/
+        
+        #mysoft_popup_mask {
+            background-color: #222;
+            display: none;
+            position: fixed;
+            z-index: 999998;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            opacity: 0.3;
+            height: 100%;
+            width: 100%;
+        }
+        
+        #mysoft_popup {
+            color: #222;
+            -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.6);
+            display: none;
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 999999;
+            min-height: 50px;
+        }
+        
+        #mysoft_popup.loading {
+            top: 50%;
+            left: 50%;
+            margin: -50px 0 0 -62px;
+            opacity: .78;
+            text-align: center;
+            width: 125px;
+            height: 100px;
+            border-radius: 5px;
+            background-color: #000;
+        }
+        
+        #mysoft_popup.loading .img {
+            border: none;
+            margin-top: 22px;
+            width: 100%;
+            height: 35px;
+            background-image: url(Public/myui_v1/images/indicator_medium.gif);
+            background-size: 35px;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        
+        #mysoft_popup.alert,
+        #mysoft_popup.confirm {
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        
+        #tag_close_popup {
+            color: #BDC3C7;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1em;
+            padding: 5px 5px 10px 10px;
+        }
+        
+        #mysoft_popup.loading p {
+            font-size: 17px;
+            color: #fff;
+            padding-top: 9px;
+            margin: 0px;
+        }
+        
+        #mysoft_popup.loading i.icon {
+            color: #fff;
+            font-size: 4em;
+            line-height: 110px;
+            margin: 0;
+            display: inline-block;
+            -webkit-animation: spinner .5s infinite linear;
+        }
+        
+        .popup-title {
+            background: #fff;
+            color: #000;
+            text-align: center;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        
+        .popup-content {
+            text-align: center;
+            padding: 0 14px 10px 14px;
+            line-height: 1.2em;
+            font-size: 14px;
+            border-radius: 5px;
+            color: #000;
+        }
+        
+        #popup_btn_container {
+            text-align: center;
+            margin-top: 10px;
+            display: -webkit-box;
+            display: box;
+        }
+        
+        #popup_btn_container>a {
+            font-size: 16px;
+            -webkit-box-flex: 1;
+            box-flex: 1;
+            padding: 12px 10px;
+            display: block;
+            color: #0c7bf7;
+            border: 1px solid #d9d9d9;
+            border-left: none;
+            border-bottom: none;
+            border-right: 0;
+        }
+        
+        #popup_btn_container>a:active {
+            background-color: #d9d9d9;
+        }
+        
+        #popup_btn_container>a:first-child {
+            border-right: 1px solid #d9d9d9;
+            border-bottom-left-radius: 5px;
+        }
+        
+        #popup_btn_container>a:last-child {
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+    <script>
+        /**
+         * @description MYSOFT 全局对象，负责前端的交互组织
+         * @namespace 全局的命名空间
+         */
+        MYSOFT = window.MYSOFT || {};
+
+        /**
+         * @description MYSOFT界面对象，负责前端的公共控件
+         * @namespace MYSOFT界面的命名空间
+         */
+        MYSOFT.Ui = window.MYSOFT.Ui || {};
+
+        /**
+         * @description MYSOFT全局配置
+         * @namespace MYSOFT全局配置的命名空间
+         */
+        MYSOFT.Config = window.MYSOFT.Config || {};
+
+        /**
+         * @description MYSOFT工具
+         * @namespace MYSOFT工具的命名空间
+         */
+        MYSOFT.Util = window.MYSOFT.Util || {};
+
+        /**
+         * @description MYSOFT Dom命名空间,负责Dom操作
+         * @namespace MYSOFT Dom命名空间
+         */
+        MYSOFT.Dom = window.MYSOFT.Dom || {};
+        /**
+         * @namespace MYSOFT弹出框组件类
+         */
+        $.Ui = {};
+        $.Ui.Popup = MYSOFT.Ui.Popup = {
+            //初始化Dom对象到文档
+            Init: function () {
+                if (!MYSOFT.Ui.Popup.DomObj) {
+                    //全局只有一个实例
+                    $('body').append('<div id="mysoft_popup"></div><div id="mysoft_popup_mask"></div>');
+                    MYSOFT.Ui.Popup.DomObj = $('#mysoft_popup');
+                    MYSOFT.Ui.Popup.MaskDomObj = $('#mysoft_popup_mask');
+                }
+            },
+            Show: function (html, cls) {
+                MYSOFT.Ui.Popup.Init();
+                MYSOFT.Ui.Popup.MaskDomObj.show();
+                MYSOFT.Ui.Popup.DomObj.removeAttr('class').addClass(cls).html(html).show();
+                $('#tag_ok_popup').bind('click', function () {
+                    MYSOFT.Ui.Popup.HidePopUp();
+                });
+            },
+            /**
+             * @method 显示加载动画
+             * @param text 加载文本
+             */
+            ShowLoading: function (text) {
+                MYSOFT.Ui.Popup.Init();
+                var markup = MYSOFT.Ui.Popup.Template.loading.replace('{title}', text || '正在加载');
+                MYSOFT.Ui.Popup.MaskDomObj.show().css({
+                    'opacity': '0'
+                });
+                MYSOFT.Ui.Popup.DomObj.removeAttr('class').addClass('loading').html(markup).show();
+            },
+            /**
+             * @method 隐藏弹出框
+             */
+            HidePopUp: function () {
+                MYSOFT.Ui.Popup.MaskDomObj.hide();
+                MYSOFT.Ui.Popup.DomObj.hide().empty();
+            },
+            /**
+             * @method 弹出框提示
+             * @param title 提示标题
+             * @param content 提示内容
+             * @param okCall 点击确定回调函数
+             */
+            ShowAlert: function (title, content, okCall) {
+                var markup = MYSOFT.Ui.Popup.Template.alert.replace('{title}', title || '提示信息').replace(
+                    '{content}', content).replace('{ok}', '我知道了');
+                MYSOFT.Ui.Popup.Init();
+                MYSOFT.Ui.Popup.MaskDomObj.show();
+                MYSOFT.Ui.Popup.DomObj.removeAttr('class').addClass('alert').html(markup).show();
+                $('#tag_ok_popup').bind('click', function () {
+                    MYSOFT.Ui.Popup.HidePopUp();
+                    okCall && okCall();
+                });
+                MYSOFT.Ui.Popup.DomObj.css('margin-top', -(MYSOFT.Ui.Popup.DomObj.height() / 2));
+            },
+            /**
+             * @method 确认框提示
+             * @param title 提示标题
+             * @param content 提示内容
+             * @param okCall 确定回调函数
+             * @param cancelCall 取消回调函数
+             */
+            ShowConfirm: function (title, content, okCall, cancelCall, okText, cancelText) {
+                okText = okText || '确 定';
+                cancelText = cancelText || '取 消';
+                var markup = MYSOFT.Ui.Popup.Template.confirm.replace('{title}', title).replace('{content}',
+                    content).replace('{cancel}', cancelText).replace('{ok}', okText);
+                MYSOFT.Ui.Popup.Init();
+                MYSOFT.Ui.Popup.MaskDomObj.show();
+                MYSOFT.Ui.Popup.DomObj.removeAttr('class').addClass('confirm').html(markup).show();
+                $('#tag_ok_popup').bind('click', function () {
+                    MYSOFT.Ui.Popup.HidePopUp();
+                    okCall && okCall();
+                }).bind('touchstart', function (e) {
+                    e.stopPropagation();
+                });
+                $('#tag_cancel_popup').bind('click', function () {
+                    MYSOFT.Ui.Popup.HidePopUp();
+                    cancelCall && cancelCall();
+                }).bind('touchstart', function (e) {
+                    e.stopPropagation();
+                });
+                MYSOFT.Ui.Popup.DomObj.css('margin-top', -(MYSOFT.Ui.Popup.DomObj.height() / 2));
+            },
+            /**
+             * @object Popup模版
+             */
+            Template: {
+                //加载动画
+                loading: '<div class="img"></div><p>{title}</p>',
+                //提示框
+                alert: '<div class="popup-title">{title}</div><div class="popup-content">{content}</div><div id="popup_btn_container"><a id="tag_ok_popup">{ok}</a></div>',
+                //确认提示框
+                confirm: '<div class="popup-title">{title}</div><div class="popup-content">{content}</div><div id="popup_btn_container"><a id="tag_cancel_popup">{cancel}</a><a id="tag_ok_popup">{ok}</a></div>'
+            }
+        };
+    </script>
+    <script type="text/javascript">
+        function getFormObj(id, formid) {
+            return $("#" + formid + " #" + id);
+        }
+
+        function initCtrlData(initData, formid) {
+            for (var index = 0; index < initData.length; index++) {
+                var temp = initData[index];
+                var obj = getFormObj(temp.fieldname, formid);
+                if (obj.length == 1) {
+                    obj.val(temp.fieldValue);
+                }
+            }
+            UI.formatForm.clear(formid);
+        }
+
+        function normal_validate(model, formId) {
+            var result = 0;
+            var formObj = $('#' + formId);
+            for (var index = 0; index < model.length; index++) {
+                var temp = model[index];
+                var id = temp.fieldname;
+                var title = temp.displayname;
+                var jObj = getFormObj(id, formId); // $("#" + id,formObj);
+                if (jObj && jObj.length == 1) {
+                    if (jObj.attr('haserror') == "1") {
+                        continue;
+                    }
+                    UI.formErrorMsg.remove(id, formId);
+                    var value = jObj.val();
+
+                    var isRequired = parseInt(temp.isrequired);
+
+                    if (isRequired) {
+                        var fixErr = "请选择";
+                        if (temp.inputtype == 'text' || temp.inputtype == 'number' ||
+                            temp.inputtype == 'tel' || temp.inputtype == 'textarea') {
+                            fixErr = "请输入";
+                        }
+                        if (!value) {
+                            UI.formErrorMsg.send(id, fixErr + title, formId);
+                            result += 1;
+                            continue;
+                        }
+                        var tempValue = value.replace(/(^\s*)|(\s*$)/g, '');
+                        if (!tempValue) {
+                            UI.formErrorMsg.send(id, fixErr + title, formId);
+                            result += 1;
+                            continue;
+                        }
+                    }
+
+
+                    var regex = temp.regex;
+
+                    if (regex && regex != "") {
+                        var regObj = eval(regex);
+                        if (!regObj.test(value)) {
+                            var errorMsg = temp.errormsg;
+                            if (!errorMsg)
+                                errorMsg = "格式不合法";
+                            UI.formErrorMsg.send(id, errorMsg, formId);
+                            result += 1;
+                            continue;
+                        }
+                    }
+
+                }
+            }
+            result += validUnPhone();
+            result += labelRefine();
+            if (result != 0)
+                return false;
+            return true;
+        }
+
+        function labelRefine() {
+            var rs = 0;
+            if ($('form').attr('for-label') == 'mark') {
+                if ($('#contentsLabel').length > 0) {
+                    var contentsLabel = $('#contentsLabel'),
+                        contentVal = contentsLabel.val();
+                    if (contentVal.length > 45) {
+                        var s = contentVal.length - 45;
+                        if (contentsLabel.closest('.form-group').next('.error').length == 0) {
+                            contentsLabel.closest(".form-group").after(
+                                '<div style="display:block" class="error" for="">字符超过限制，超过' + s + '字。</div>');
+                        }
+                        rs += 1;
+                    };
+                } else {
+                    if ($('#contents').length > 0) {
+                        var contentsLabel = $('#contents'),
+                            contentVal = contentsLabel.val();
+                        if (contentVal.length > 45 && contentsLabel.attr('re') == 'contents') {
+                            var s = contentVal.length - 45;
+                            if (contentsLabel.closest('.form-group').next('.error').length == 0) {
+                                contentsLabel.closest(".form-group").after(
+                                    '<div style="display:block" class="error" for="">字符超过限制，超过' + s + '字。</div>');
+                            }
+                            rs += 1;
+                        };
+                    }
+                }
+            }
+            return rs;
+        }
+
+        function validUnPhone() {
+            var terForm = $('.form-custom').first(),
+                ter = $('input', terForm),
+                ters = $('input[data-name="ter"]').not(ter.first()),
+                rs = 0,
+                regPartton = /^(1)\d{10}$/;;
+            if (ter.val() == '') {
+                UI.formErrorMsg.send(ter.attr('id'), "请输入" + $('span', ter.closest('.form-custom')).text());
+                rs += 1;
+            }
+            for (var i = 0; i < ters.length; i++) {
+                if (ters.eq(i).val() != '') {
+                    if ($('span', ters.eq(i).closest('.form-custom')).attr('data-id') == '1') {
+                        if (regPartton.test(ters.eq(i).val())) {
+                            ters.eq(i).parents(".form-custom").next('.error').remove();
+                        } else {
+                            if (ters.eq(i).closest('.form-custom').next('.error').length == 0) {
+                                ters.eq(i).closest(".form-custom").after(
+                                    '<div style="display:block" class="error" for="mobile_tel">手机号格式不正确</div>');
+                            }
+                            rs += 1;
+                        }
+                    } else {
+                        if (ters.eq(i).val() == '') {
+                            //            ter.attr('haserror','1');
+                            UI.formErrorMsg.send(ters.eq(i).attr('id'), "请输入" + $('span', ters.eq(i).closest(
+                                '.form-custom')).text());
+                            rs += 1;
+                        }
+                    }
+                } else {
+                    ters.eq(i).parents(".form-custom").next('.error').remove();
+                }
+            }
+            return rs;
+        }
+
+        function collect_data(model, formId) {
+            var datas = {};
+            var formObj = $('#' + formId);
+            for (var index = 0; index < model.length; index++) {
+                var temp = model[index];
+                var id = temp.fieldname;
+                var jObj = getFormObj(id, formId); // $("#" + id,formObj);
+                var tableName = temp.tableName;
+                if (jObj) {
+                    datas[tableName + "." + id] = jObj.val();
+                }
+            }
+            return datas;
+        }
+
+        function getInitData(formId) {
+            var model = [];
+            var tokenValue = getFormObj('token', formId).val(); // $("#token").val();
+            var openid = getFormObj('openid', formId).val(); // $("#openid").val();
+            model.push({
+                "fieldname": "cst_name",
+                "fieldValue": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            model.push({
+                "fieldname": "mobile_tel",
+                "fieldValue": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            model.push({
+                "fieldname": "gender",
+                "fieldValue": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            model.push({
+                "fieldname": "qwkfdate",
+                "fieldValue": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            return model;
+        }
+
+        function get_model(formId) {
+            var model = [];
+            var tokenValue = getFormObj('token', formId).val(); // $("#token").val();
+            var openid = getFormObj('openid', formId).val(); //$("#openid").val();
+            model.push({
+                "fieldname": "cst_name",
+                "displayname": "姓名",
+                "length": "50",
+                "isrequired": "1",
+                "inputtype": "text",
+                "regex": "",
+                "tableName": "s_lpyykf",
+                "errormsg": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            model.push({
+                "fieldname": "mobile_tel",
+                "displayname": "手机",
+                "length": "20",
+                "isrequired": "1",
+                "inputtype": "tel",
+                "regex": "",
+                "tableName": "s_lpyykf",
+                "errormsg": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            model.push({
+                "fieldname": "gender",
+                "displayname": "性别",
+                "length": "2",
+                "isrequired": "1",
+                "inputtype": "checkbox",
+                "regex": "",
+                "tableName": "s_lpyykf",
+                "errormsg": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            model.push({
+                "fieldname": "qwkfdate",
+                "displayname": "看房时间",
+                "length": "",
+                "isrequired": "0",
+                "inputtype": "date",
+                "regex": "",
+                "tableName": "s_lpyykf",
+                "errormsg": "",
+                "token": tokenValue,
+                "openid": openid
+            });
+            if (typeof (fans_id) != "undefined") {
+                model.push({
+                    "fieldname": "fans_id",
+                    "displayname": fans_id,
+                    "length": "",
+                    "isrequired": "",
+                    "regex": "",
+                    "tableName": "mycms_lpyykf",
+                    "errormsg": "",
+                    "token": tokenValue,
+                    "openid": openid
+                });
+
+            }
+
+            return model;
+        }
+
+        function validateCode() {
+            var rs = 0;
+            var codeParam = 'txtCode';
+            var code = $('#' + codeParam).val();
+            UI.formErrorMsg.remove(codeParam);
+            if (code == '' || code == "undefined") {
+                UI.formErrorMsg.send(codeParam, "请输入验证码");
+                rs += 1;
+            }
+            return rs;
+        }
+
+        function validateFollow() {
+            var rs = 0;
+            var followidsParam = 'followidsParam';
+            var followtype = $('#' + followidsParam).val();
+            UI.formErrorMsg.remove(followidsParam);
+            if (followtype == '' || followtype == "undefined") {
+                UI.formErrorMsg.send(followidsParam, "请选择跟进方式");
+                rs += 1;
+            }
+            var followlevelParam = 'followlevelParam';
+            var followlevel = $('#' + followlevelParam).val();
+            UI.formErrorMsg.remove(followlevelParam);
+            if (followlevel == '' || followlevel == "undefined") {
+                UI.formErrorMsg.send(followlevelParam, "请选择意向级别");
+                rs += 1;
+            }
+            var contents = 'contents';
+            var followcontent = $('#' + contents).val();
+            UI.formErrorMsg.remove(contents);
+            if (followcontent == '' || followcontent == "undefined") {
+                UI.formErrorMsg.send(contents, "请填写跟进内容");
+                rs += 1;
+            }
+            var nexttime = 'nexttime';
+            var nowDate = "".replace(/-/g, '/').split(' ')[0];
+            var nextDate = $("#" + nexttime).val().replace(/-/g, '/').split(' ')[0];
+            UI.formErrorMsg.remove(nexttime);
+            if (nextDate < nowDate) {
+                UI.formErrorMsg.send(nexttime, "下次跟进日期必须大于等于跟进时间");
+                rs += 1;
+            }
+            return rs;
+        }
+
+        function getFollowData() {
+            var data = {
+                is_add_follow: 0,
+                followids: $("#followidsParam").val(),
+                followlevel: $("#followlevelParam").val(),
+                followtime: $("#followtime").val(),
+                contents: $("#contents").val(),
+                nexttime: $("#nexttime").val()
+            };
+            return data;
+        }
+
+        /*
+        	url:post的url；
+        	data:自定义的数据；暂未实现（测试）
+        	validate：自定义验证的json对象
+        	success：post成功后的回调函数，参数为后台返回的msg
+        	error：post异常后的回调函数，参数为错误信息（参见$.ajax的error回调）
+
+         */
+        function post_form_data(url, data, validate, success, error, formId) {
+            var model = get_model(formId)
+            parentForm = document.getElementById(formId);
+            parentForm = $(parentForm);
+            var hasError = false;
+
+            if (!normal_validate(model, formId)) {
+                var offsettop = $('div.error').prev().offset().top;
+                window.scrollTo(0, offsettop - 50);
+                return;
+            }
+            if (validate) {
+
+                for (var index = 0; index < model.length; index++) {
+                    var temp = model[index];
+                    var id = temp.fieldname;
+                    var terForm = $('.form-custom').first();
+                    if ($('input[id="' + id + '"]', terForm).length > 0) {
+                        if (validate[id] && !validate[id]()) {
+                            hasError = true;
+                            break;
+                        }
+                    } else {
+                        if (validate[id] && !validate[id]()) {
+                            hasError = true;
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            if (hasError) {
+                var offsettop = $('div.error').prev().offset().top;
+                window.scrollTo(0, offsettop - 50);
+                return;
+            }
+            var collectdata = collect_data(model, formId);
+            var jsonStr = JSON.stringify(collectdata);
+            var postdata = {
+                data: jsonStr
+            };
+            if (data) {
+                postdata.customData = JSON.stringify(data);
+            }
+            postdata.followData = getFollowData();
+            postdata.mobiles = [];
+            var custom = $('.form-custom', parentForm);
+            for (var i = 0; i < custom.length; i++) {
+                postdata.mobiles[i] = {};
+                postdata.mobiles[i].name = custom.eq(i).children('label').children('span').attr('data-id') || 1;
+                postdata.mobiles[i].num = custom.eq(i).find('input[name="mobile_tel"]').eq(0).val();
+            }
+            postdata.mobiles = JSON.stringify(postdata.mobiles);
+            //console.log(JSON.parse(postdata.mobiles));
+            MYSOFT.Ui.Popup.ShowLoading('正在提交');
+            $.ajax({
+                type: "POST",
+                async: false,
+                cache: false,
+                url: url,
+                data: postdata,
+                success: success,
+                error: error
+            });
+        }
+        $(function () {
+            $('.form-custom input[type="tel"]').on('input', function () {
+                var mobile = this.value;
+                var $this = $(this);
+                var regPartton = /^(1)\d{10}$/;
+                var warpper = $this.parents(".form-custom");
+                var itype = $('label span', $this.closest('.form-custom')).attr('data-id');
+                var custom = $this.closest('.form-custom').siblings('.form-custom');
+                if (mobile != '' && mobile.length >= 11) {
+                    for (var i = 0; i < custom.length; i++) {
+                        var input = custom.eq(i).children().children('input');
+                        if (mobile == input.val()) {
+                            console.log('这是重复号码！！！');
+                        }
+                    }
+                    if (itype == '1') {
+                        if (regPartton.test(mobile)) {
+                            var cst_id = "";
+                            warpper.next('.error').remove();
+                            $.post(
+                                "/Sales/Estate/checkCustomerExist?token=tdyajl1427723483&userid=&proj_id=e807f035-bc0b-40c0-942a-08f9639bd253", {
+                                    mobile_tel: mobile,
+                                    "cst_id": cst_id
+                                },
+                                function (data) {
+                                    var json = $.parseJSON(data);
+                                    if (json.isRight == '0') {
+                                        $this.attr('haserror', '1');
+                                        if (json.url) {
+                                            MYSOFT.Ui.Popup.ShowConfirm('提醒',
+                                                "该客户已在您的名下，是否需要查看该客户？",
+                                                function () {
+                                                    window.location.replace(json.url);
+                                                });
+                                        } else {
+                                            warpper.after(
+                                                '<div style="display:block" class="error" for="mobile_tel">' +
+                                                json.msg + '</div>');
+                                        }
+                                    } else {
+                                        $this.attr('haserror', '0');
+                                    }
+                                });
+                        } else {
+                            if (!regPartton.test(mobile)) {
+                                var diverror = $(this).parents(".form-custom").next('.error');
+                                if (diverror.length == 0) {
+                                    $(this).parents(".form-custom").after(
+                                        '<div style="display:block" class="error" for="mobile_tel">手机号格式不正确</div>'
+                                    );
+                                } else {
+                                    diverror.html('手机号格式不正确');
+                                }
+                                $this.attr('haserror', '1');
+                            } else {
+                                $(this).parents(".form-custom").next('.error').remove();
+                                $this.attr('haserror', '0');
+                            }
+                        }
+                    } else {
+                        var cst_id = "${cst_id}";
+                        $(this).parents(".form-custom").next('.error').remove();
+                        $.post(
+                            "/Sales/Estate/checkCustomerExist?token=tdyajl1427723483&userid=&proj_id=e807f035-bc0b-40c0-942a-08f9639bd253", {
+                                mobile_tel: mobile,
+                                "cst_id": cst_id
+                            },
+                            function (data) {
+                                var json = $.parseJSON(data);
+                                if (json.isRight == '0') {
+                                    $this.attr('haserror', '1');
+                                    if (json.url) {
+                                        MYSOFT.Ui.Popup.ShowConfirm('提醒', "该客户已在您的名下，是否需要查看该客户？",
+                                            function () {
+                                                window.location.replace(json.url);
+                                            });
+                                    } else {
+                                        warpper.after(
+                                            '<div style="display:block" class="error" for="mobile_tel">' +
+                                            json.msg + '</div>');
+                                    }
+                                } else {
+                                    $this.attr('haserror', '0');
+                                }
+                            });
+                    }
+
+                } else {
+                    $(this).parents(".form-custom").next('.error').remove();
+                }
+                /*            else{
+                                if(itype == '1'){
+                                    $('.error[for="mobile_tel"]').remove();
+                                    warpper.after('<div style="display:block" class="error" for="mobile_tel">请填写手机</div>');
+                                }
+                            }*/
+                /*if(mobile!=''&&regPartton.test(mobile)){
+                    $("div.error[for='mobile_tel']").remove();
+                    $.post("/Sales/Estate/checkCustomerExist?token=tdyajl1427723483&userid=&proj_id=e807f035-bc0b-40c0-942a-08f9639bd253",{mobile_tel:mobile},function(data){
+                        var json= $.parseJSON(data);
+                        if(json.isRight=='0'){
+                            $this.attr('haserror','1');
+                            if(json.url){
+                                MYSOFT.Ui.Popup.ShowConfirm('提醒',"该客户已在您的名下，是否需要查看该客户？",function(){
+                                    window.location.replace(json.url);
+                                });
+                            }
+                            else{
+                                warpper.after('<div style="display:block" class="error" for="mobile_tel">'+json.msg+'</div>');
+                            }
+                        }
+                        else{
+                            $this.attr('haserror','0');
+                        }
+                    });
+                }
+                else{
+                    if(mobile.length==11&&!regPartton.test(mobile)){
+                        var diverror=$("div.error[for='mobile_tel']");
+                        if(diverror.length==0){
+                            warpper.after('<div style="display:block" class="error" for="mobile_tel">手机号格式错误</div>');
+                        }
+                        else{
+                            diverror.html('手机号格式错误');
+                        }
+                        $this.attr('haserror','1');
+                    }
+                    else{
+                        $("div.error[for='mobile_tel']").remove();
+                        $this.attr('haserror','0');
+                    }
+                }*/
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var is_code_click = 0;
+        var timeOut = parseInt("60000");
+        var resetValidate = function ($this) {
+            $this.removeClass('btndisable');
+            $this.val('发送验证码');
+            $this.removeAttr('disabled');
+            clearInterval(interval);
+        };
+        var interval;
+        $(function () {
+            $(".tab li").click(function (event) {
+                var li = $(this);
+                li.parent().find("li.select").removeClass('select');
+                li.addClass('select')
+            });
+        });
+
+        var fans_id = "";
+        $(function () {
+            $(window).on("resize", function () {
+                $("#hack").remove();
+                var div = $(
+                    "<div id='hack' style='height:1px;width:100%;background-color:#f0f0f0;overflow: hidden;font-size: 0'>*hack*</div>"
+                );
+                $("body").append(div);
+            });
+            var windownH;
+            var tmpinterval = setInterval(function () {
+                windownH = $(window).height();
+                if (windownH != 0) {
+                    $('#minpanel').css('min-height', windownH - 29);
+                    clearInterval(tmpinterval);
+                }
+            }, 100);
+            //查看预约结果
+            $('#newlocal').bind('click', function () {
+                window.location.replace($(this).attr('_href'));
+            });
+            //获取验证码
+            $('#btnGetCode').bind('click', function () {
+                is_code_click = 1;
+                var mobile = $('#mobile_tel').val();
+                UI.formErrorMsg.remove("mobile_tel");
+                var regPartton = /^(1)\d{10}$/;
+                if (mobile == '') {
+                    UI.formErrorMsg.send("mobile_tel", "请输入手机号码");
+                } else if (!regPartton.test(mobile) || mobile.length != 11) {
+                    UI.formErrorMsg.send("mobile_tel", "请输入正确的手机号码");
+                } else {
+                    var tmp = timeOut;
+                    var $this = $(this);
+                    $this.addClass('btndisable').attr('disabled', 'disabled').val((tmp / 1000) +
+                        '秒后可重发');
+                    interval = setInterval(function () {
+                        tmp -= 1000;
+                        if (tmp == 0) {
+                            resetValidate($this);
+                        } else {
+                            $this.val((tmp / 1000) + '秒后可重发');
+                        }
+                    }, 1000);
+                    var getUrl = "/Sales/Estate/ajaxGetSmsByLogin?token=tdyajl1427723483";
+                    $.ajax({
+                        url: getUrl,
+                        type: "POST",
+                        cache: false,
+                        data: {
+                            mobile_tel: mobile
+                        },
+                        complete: function (jqXHR, status) {
+                            if (status != 'success') {
+                                MYSOFT.Ui.Popup.ShowAlert('提示', '设置失败,请稍候重试');
+                            }
+                        },
+                        success: function (data) {
+                            var result = eval("(" + data + ")");
+                            if (result.isSuccess == 0) {
+                                if (result.isStop == "1") {
+                                    resetValidate($this);
+                                }
+                                MYSOFT.Ui.Popup.ShowAlert('提示', result.msg);
+                                return;
+                            }
+                        }
+                    });
+                }
+            });
+        });
+
+        function checkRealName() {
+            UI.formErrorMsg.remove("truename");
+            var name = $("#truename").val();
+
+            name = name.replace(/(^\s*)|(\s*$)/g, '');
+            if (!name) {
+                UI.formErrorMsg.send("truename", "请输入您的姓名");
+                return 0;
+            } else {
+                UI.formErrorMsg.remove("truename");
+                return 1;
+            }
+        }
+
+        function checkTel() {
+            UI.formErrorMsg.remove("tel");
+            var tel = $("#tel").val();
+            if (!tel) {
+                UI.formErrorMsg.send("tel", "请输入手机号码");
+                return 2;
+            } else {
+                if (tel.length != 11) {
+                    UI.formErrorMsg.send("tel", "请输入11位手机号码！");
+                    return 4;
+                } else {
+                    var regPartton = /^(1)\d{10}$/;
+                    if (!regPartton.test(tel) || tel.length != 11) {
+                        UI.formErrorMsg.send("tel", "请输入以1开头的手机号码！");
+                        return 3;
+                    }
+
+                }
+                return 1;
+            }
+
+        }
+        var validate = {
+            "mobile_tel": function () {
+                var telid = "mobile_tel"
+                var tel = $('#' + telid).val();
+                var regPartton = /^(1)\d{10}$/;
+                if (tel.length != 11 || !regPartton.test(tel)) {
+                    UI.formErrorMsg.send(telid, "手机格式不正确");
+                    return false;
+                }
+                return true;
+            }
+        };
+        var IsSaveOk = 0;
+
+        function mysubmit(obj) {
+
+            // var url ="/Sales/Estate/SaveReservationShowings?token=tdyajl1427723483&projid=e807f035-bc0b-40c0-942a-08f9639bd253";
+            var url = '#';
+            var customerData = {};
+            if ($("#salesId")) {
+                customerData.fp_sale_uid = $("#salesId").attr("salesId");
+            }
+            customerData.fans_id = $("#fans_id").val();
+            customerData.code = $('#txtCode').val();
+            customerData.is_code_click = is_code_click;
+            post_form_data(
+                url,
+                customerData,
+                validate,
+                function (data) {
+                    MYSOFT.Ui.Popup.HidePopUp();
+                    $("#showerrmsg").html("&nbsp;");
+                    $("#yu_success_").hide();
+                    $("#yu_error_").hide();
+                    var backdata = eval('(' + data + ')');
+                    if (backdata.errno == 0) {
+                        IsSaveOk = 1;
+                        $('#successpanel .powered').css({
+                            'position': 'absolute',
+                            'bottom': '0px'
+                        });
+                        $('#successpanel').show();
+                        $('#newlocal').attr('_href', backdata.urls);
+                    } else if (backdata.errno == 1) {
+                        IsSaveOk = 0;
+                        MYSOFT.Ui.Popup.ShowAlert('提示', backdata.msg);
+                    } else {
+                        UI.creatPopMsg.creat(backdata.msg);
+                    }
+                },
+                function (msg) {
+                    UI.creatPopMsg.creat(msg);
+                },
+                'postfform'
+            );
+        }
+
+
+        $("#windowclosebutton").click(function () {
+            $("#windowcenter").slideUp(500);
+        });
+        $("#alertclose").click(function () {
+            $("#windowcenter").slideUp(500);
+        });
+
+        function jumpurl(url) {
+            window.location.href = url;
+        }
+
+        function showerrmsg(title) {
+            $("#showerrmsg").show();
+            $("#showerrmsg").html(title);
+            setTimeout('$("#showerrmsg").html("&nbsp;")', 4000);
+        }
+
+        function hide_alert() {
+            $(".alert_dialog").hide();
+            if (IsSaveOk == 1) {
+                // window.location.href = "/Estate/Estate/index?token=tdyajl1427723483&openid=omv_JsywPZUKOLrZNooFiI7cqVzs&guid=&projid=e807f035-bc0b-40c0-942a-08f9639bd253";
+                window.history.go(-1); //回到来时的url
+
+            }
+        };
+        (function () {
+            //增加tap方法，修复点击时的闪屏感提升响应速度
+            var isTouch = ('ontouchstart' in document.documentElement) ? 'touchstart' : 'click';
+            if (!$.fn.tap) {
+                $.fn.tap = function () {
+                    arguments[0] = (arguments[0] === 'click') ? isTouch : arguments[0];
+                    return $.fn.on.apply(this, arguments);
+                }
+            }
+        })();
+        var selects = $('.sexSelect label');
+        selects.tap('click', function () {
+            if ($(this).hasClass('act')) {
+                $(this).parent().siblings().children('label').removeClass('act');
+                $(this).prop('checked', true);
+            } else {
+                $(this).prop('checked', false);
+                $(this).addClass('act').parent().siblings().children('label').removeClass('act');
+            }
+        });
+    </script>
+</body>
+
+</html>

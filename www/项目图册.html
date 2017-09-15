@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>项目图册</title>
+    <script type="text/javascript">
+        var statistics = {}
+        statistics.start = +new Date();
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="Public/dest/base.min.css" />
+    <!--站点统计 [[-->
+    <script type='text/javascript'>
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function () {
+            _vds.push(['setAccountId', 'a4f46f59c1ea0610']);
+
+            if (window.localStorage) {
+                var statsInfoStr = localStorage.getItem('siteStatsInfo');
+                if (statsInfoStr) {
+                    var statsInfo = JSON.parse(statsInfoStr);
+
+                    if (statsInfo) {
+                        statsInfo.userId && _vds.push(['setCS1', 'userId', statsInfo.userId]);
+                        statsInfo.projName && _vds.push(['setCS2', 'proj', statsInfo.projName + '___' + statsInfo.projId]);
+
+                        var wxName = statsInfo.wxName || statsInfo.wxname;
+                        wxName && _vds.push(['setCS3', 'wx', wxName + '___' + statsInfo.token]);
+
+                        statsInfo.orgName && _vds.push(['setCS4', 'org', statsInfo.orgName + '___' + statsInfo.orgId]);
+                    }
+                }
+            }
+
+            (function () {
+                var vds = document.createElement('script');
+                vds.type = 'text/javascript';
+                vds.async = true;
+                vds.src = 'Public/js/vds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(vds, s);
+            })();
+        })();
+    </script>
+    <!--站点统计 ]]-->
+    <style type="text/css">
+        body {
+            background-color: #f6f6f6;
+        }
+        
+        .swiper-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            z-index: 10;
+        }
+        
+        .swiper-wrapper {
+            width: 100%;
+            font-size: 0;
+            overflow: hidden;
+        }
+        
+        .swiper-wrapper ul {
+            white-space: nowrap;
+        }
+        
+        .swiper-wrapper li {
+            height: 40px;
+            display: inline-block;
+            line-height: 38px;
+            font-size: 16px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        .swiper-wrapper li.hide {
+            display: none;
+        }
+        
+        .swiper-container .current span {
+            height: 38px;
+            background: #fff;
+            color: #3c6;
+            border-bottom: 2px solid #3c6;
+            display: block;
+        }
+        
+        .qiandaobanner {
+            width: 100%;
+            position: relative;
+            margin-top: 40px;
+            background-size: 100% 100%;
+        }
+        
+        .qiandaobanner img {
+            display: block;
+            width: 100%;
+        }
+        
+        .qiandaobanner .jieshao {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            background: rgba(51, 204, 102, 0.8);
+            line-height: 20px;
+            font-size: 14px;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 0px;
+            box-sizing: border-box;
+        }
+        
+        .right_btn {
+            background: #f0f0f0 url(Public/myui_v1/css/photo/css/img/slide_arrow_right.png) no-repeat center center;
+            position: absolute;
+            width: 13px;
+            height: 40px;
+            background-size: 7px 10px;
+            top: 0;
+            right: 0;
+            z-index: 99999;
+        }
+        
+        .right_btn.active {
+            border-left: 1px solid #ccc;
+            box-shadow: 0px 0 10px #aaa, 0px 0 0px yellow, 0 0px 0px blue, 0 0px 0px green
+        }
+        
+        .main {
+            background-image: url(Public/myui_v1/css/photo/css/img/line.png);
+            background-repeat: repeat-y;
+            background-position: center top;
+            background-size: 5px 1px;
+        }
+        
+        .gallery {
+            padding: 0px;
+            width: 50%;
+            float: left;
+        }
+        
+        .gallery_right {
+            padding-top: 38px;
+        }
+        
+        .gallery li {
+            box-sizing: border-box;
+            padding: 12px;
+            position: relative;
+        }
+        
+        .gallery li a {
+            display: block;
+            line-height: 0;
+            font-size: 0;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #efefef;
+        }
+        
+        .gallery li img {
+            width: 100%;
+        }
+        
+        .gallery li i {
+            position: absolute;
+            width: 6px;
+            height: 11px;
+            background-repeat: no-repeat;
+            background-size: 6px 11px;
+            background-position: left top;
+        }
+        
+        .gallery_left li a i {
+            background-image: url("Public/myui_v1/css/photo/css/img/arrow_right_bg.png");
+            right: 8px;
+            top: 18px;
+        }
+        
+        .gallery_right li a i {
+            background-image: url("Public/myui_v1/css/photo/css/img/arrow_left_bg.png");
+            left: 8px;
+            top: 18px;
+        }
+        
+        .gallery li span {
+            position: absolute;
+            width: 14px;
+            height: 22px;
+            background-image: url("Public/myui_v1/css/photo/css/img/pic_icon_bg.png");
+            background-repeat: no-repeat;
+            background-size: 14px 22px;
+        }
+        
+        .gallery_left li span {
+            right: -7px;
+            top: 13px;
+        }
+        
+        .gallery_right li span {
+            left: -7px;
+            top: 13px;
+        }
+        
+        .jieshao {
+            color: #fff;
+        }
+        
+        .jieshao .photo_title {
+            font-size: 21px;
+            padding-bottom: 8px;
+        }
+        
+        .photo_info {
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body id="photo">
+    <div id="minpanel">
+        <img src="Public/myui_v1/images/indicator_medium.gif" style="display: none;" />
+        <div class="swiper-container">
+            <div class="swiper-wrapper" id="top_tab">
+                <ul>
+                    <li onclick="AjaxLoadDataInfo('39cf7fe0-70be-50cf-dc6f-072fdff66bbc',this,0)" class="hide allslidediv swiper-slide  current ">
+                        <span>康桥林溪湾实景展示</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="right_btn"></div>
+        </div>
+        <div class="qiandaobanner" id="qiandaobanner" style="margin-top:40px;">
+            <img src="Public/myui_v1/images/manage/ProjectBanner.jpg" >
+            <div class="jieshao" id="jieshao" style="display:none;">
+                <div id="photo_title" class="photo_title">康桥林溪湾实景展示</div>
+                <div id="photo_info" class="photo_info"></div>
+            </div>
+        </div>
+        <div id="main" role="main" class="main cls">
+            <div id="Gallery">
+                <ul class="gallery gallery_left cls">
+                    <li data-index="1">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=0"><i></i><img src="Public/myui_v1/images/manage/ProjectItem01.jpg" pindex="1" alt="1/10: 1"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=0"><i></i><img src="Public/myui_v1/images/manage/ProjectItem01.jpg" pindex="1" alt="1/10: 1"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="3">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=1"><i></i><img src="Public/myui_v1/images/manage/ProjectItem02.jpg" pindex="3" alt="3/10: 11"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=2"><i></i><img src="Public/myui_v1/images/manage/ProjectItem02.jpg" pindex="3" alt="3/10: 11"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="5">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=2"><i></i><img src="Public/myui_v1/images/manage/ProjectItem03.jpg" pindex="5" alt="5/10: 3"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=4"><i></i><img src="Public/myui_v1/images/manage/ProjectItem03.jpg" pindex="5" alt="5/10: 3"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="7">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=3"><i></i><img src="Public/myui_v1/images/manage/ProjectItem04.jpg" pindex="7" alt="7/10: 5"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=6"><i></i><img src="Public/myui_v1/images/manage/ProjectItem04.jpg" pindex="7" alt="7/10: 5"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="9">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=4"><i></i><img src="Public/myui_v1/images/manage/ProjectItem05.jpg" pindex="9" alt="9/10: 7"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=8"><i></i><img src="Public/myui_v1/images/manage/ProjectItem05.jpg" pindex="9" alt="9/10: 7"></a>-->
+                        <span></span>
+                    </li>
+                </ul>
+                <ul class="gallery gallery_right cls">
+                    <li data-index="2">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=5"><i></i><img src="Public/myui_v1/images/manage/ProjectItem06.jpg" pindex="2" alt="2/10: 10"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=1"><i></i><img src="Public/myui_v1/images/manage/ProjectItem06.jpg" pindex="2" alt="2/10: 10"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="4">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=6"><i></i><img src="Public/myui_v1/images/manage/ProjectItem07.jpg" pindex="4" alt="4/10: 2"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=3"><i></i><img src="Public/myui_v1/images/manage/ProjectItem07.jpg" pindex="4" alt="4/10: 2"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="6">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=7"><i></i><img src="Public/myui_v1/images/manage/ProjectItem08.jpg" pindex="6" alt="6/10: 4"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=5"><i></i><img src="Public/myui_v1/images/manage/ProjectItem08.jpg" pindex="6" alt="6/10: 4"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="8">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=8"><i></i><img src="Public/myui_v1/images/manage/ProjectItem09.jpg" pindex="8" alt="8/10: 6"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=7"><i></i><img src="Public/myui_v1/images/manage/ProjectItem09.jpg" pindex="8" alt="8/10: 6"></a>-->
+                        <span></span>
+                    </li>
+                    <li data-index="10">
+                        <a onclick="setAIndex(0)" href="项目图册单页.html?aindex=0&pindex=9"><i></i><img src="Public/myui_v1/images/manage/ProjectItem10.jpg" pindex="10" alt="10/10: 8"></a>
+                        <!--<a onclick="setAIndex(0)" href="detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=0&pindex=9"><i></i><img src="Public/myui_v1/images/manage/ProjectItem10.jpg" pindex="10" alt="10/10: 8"></a>-->
+                        <span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <style>
+        .powered {
+            background-color: #f6f6f6;
+            margin-bottom: 0px;
+            padding: 10px 0px 6px 0px;
+            font-size: 11px;
+            color: #aaa;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+    <style>
+        .powered {
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: #aaa;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .powered a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .powered a:hover,
+        .powered a:visited {
+            color: #aaa;
+        }
+        
+        .powered a:active {
+            color: #2caf56;
+        }
+    </style>
+    <div class="powered" id="powered">
+        Powered&nbsp;by&nbsp;&nbsp;<a href="http://m.myunke.com/">明源云客</a>
+    </div>
+    <script type="text/javascript" src="Public/dest/base.min.js"></script>
+    <script>
+        // document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        //     WeixinJSBridge.call('hideToolbar');
+        // });
+        $(document).ready(function () {
+            var lis = $("#top_tab li");
+            if (lis.size() >= 3) {
+                lis.width($(window).width() / 3).removeClass("hide");
+                $(window).bind("resize", function () {
+                    lis.width($(window).width() / 3);
+                    $("#top_tab ul").width(lis.width() * lis.size());
+                    myscroll.refresh();
+                });
+                $("#top_tab ul").width(lis.width() * lis.size());
+            } else {
+                lis.width($(window).width() / lis.size()).removeClass("hide");
+            }
+
+            var myscroll = new iScroll("top_tab", {
+                scrollX: true,
+                scrollY: false,
+                hScrollbar: false
+            });
+            $('#minpanel').css('min-height', $(window).height() - 84);
+            var tabSwipe = $('#top_tab'),
+                rightBtn = $('.right_btn');
+            tabSwipe.bind("touchstart", function () {
+                rightBtn.addClass("active");
+            }).bind("touchend", function () {
+                rightBtn.removeClass("active")
+            });
+            //如果菜单少于或等于3个，左右提示按钮消失
+            if (tabSwipe.find('li').length <= 3) {
+                rightBtn.hide();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        function setAIndex(aindex) {
+            sessionStorage.setItem('photo_aindex', aindex);
+        }
+
+        function AjaxLoadDataInfo(id, obj, a_index) {
+            $(".allslidediv").removeClass("current");
+            $(obj).addClass("current");
+            $("#Gallery .gallery").empty();
+            $("#Gallery").prepend(
+                '<div class="loading" style="text-align:center; "><br/><br/><img src="Public/myui_v1/images/indicator_medium.gif"  /></div>'
+            );
+            var subdate = {
+                token: "tdyajl1427723483",
+                id: id
+            };
+            $.ajax({
+                url: "/Photo/Index/AjaxGetPhotoList?id=" + id + "&token=tdyajl1427723483",
+                data: subdate,
+                dataType: "json",
+                success: function (retdata) {
+                    var data = retdata;
+                    var info = data.info;
+                    $("#qiandaobanner").css("background-image", "url(" + info.picurl + ")");
+                    $("#photo_title").html(info.title);
+                    $("#photo_info").html(info.info);
+                    if (info.isshowinfo == 1) {
+                        $("#jieshao").show();
+                    } else {
+                        $("#jieshao").hide();
+                    }
+                    if (data.photo_list == "" || data.photo_list == null) {
+                        $("#Gallery").append(
+                            "<div style='font-size:16px; height:50px; text-align:center; line-height:50px;'>无相关数据</div>"
+                        );
+                    } else {
+                        $("#Gallery .loading").remove();
+                        var photo_list = data.photo_list;
+                        var li_left = "",
+                            li_right = "";
+                        //var arrHTML = [];
+                        $.each(photo_list, function (i, item) {
+                            if (i % 2 == 1) {
+                                li_right += returnli(i, item);
+                            } else {
+                                li_left += returnli(i, item);
+                            }
+                        });
+
+                        function returnli(i, item) {
+                            var str = "<li><a onclick='setAIndex(\"" + a_index +
+                                "\");' href='detail?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253&app=5001&aindex=" +
+                                a_index + "&pindex=" + i + "'><i></i><img src=\"" + item.picurl +
+                                "\" pindex=" + (i + 1) + " alt=" + (i + 1) + "/" + data.all_count + ":" +
+                                item.title + "></a><span></span></li>";
+                            //arrHTML.push('<div style="height:100%;text-align:center;"><img src="' + item.picurl + '"></div>');
+                            return str;
+                        }
+                        //arrHTML = arrHTML.join('');
+                        $("#main .gallery_left").html(li_left);
+                        $("#main .gallery_right").html(li_right);
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+
+</html>

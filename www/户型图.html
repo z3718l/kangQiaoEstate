@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript">
+        var statistics = {}
+        statistics.start = +new Date();
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="Public/dest/base.min.css" />
+    <!--站点统计 [[-->
+    <script type='text/javascript'>
+        var _vds = _vds || [];
+        window._vds = _vds;
+        (function () {
+            _vds.push(['setAccountId', 'a4f46f59c1ea0610']);
+
+            if (window.localStorage) {
+                var statsInfoStr = localStorage.getItem('siteStatsInfo');
+                if (statsInfoStr) {
+                    var statsInfo = JSON.parse(statsInfoStr);
+
+                    if (statsInfo) {
+                        statsInfo.userId && _vds.push(['setCS1', 'userId', statsInfo.userId]);
+                        statsInfo.projName && _vds.push(['setCS2', 'proj', statsInfo.projName + '___' + statsInfo.projId]);
+
+                        var wxName = statsInfo.wxName || statsInfo.wxname;
+                        wxName && _vds.push(['setCS3', 'wx', wxName + '___' + statsInfo.token]);
+
+                        statsInfo.orgName && _vds.push(['setCS4', 'org', statsInfo.orgName + '___' + statsInfo.orgId]);
+                    }
+                }
+            }
+
+            (function () {
+                var vds = document.createElement('script');
+                vds.type = 'text/javascript';
+                vds.async = true;
+                vds.src = 'Public/js/vds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(vds, s);
+            })();
+        })();
+    </script>
+    <!--站点统计 ]]-->
+    <title>户型图</title>
+    <link rel="stylesheet" href="Public/myui_v1/css/base.css" />
+    <style>
+        body {
+            overflow: hidden;
+        }
+        
+        .right_top_close_icon {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            position: fixed;
+            right: 00px;
+            top: 0px;
+            z-index: 9999;
+            background: url(Public/myui_v1/images/Estate/close_icon.png) no-repeat center center;
+            background-size: 100% 100%;
+            filter: alpha(Opacity=100);
+            -moz-opacity: 1.0;
+            opacity: 1.0
+        }
+        
+        .go360 {
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            z-index: 99999;
+            border: none;
+            background-image: url(Public/myui_v1/images/Estate/btn_360.png);
+            background-size: 89px 44px;
+            height: 48px;
+            width: 89px;
+            background-repeat: no-repeat;
+        }
+        
+        .footer_div {
+            height: 64px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: #1b1b1b;
+            opacity: .85;
+            color: #FFF;
+            z-index: 99999;
+        }
+        
+        .footer_div .footer_left {
+            float: left;
+            padding: 17px 0 12px;
+        }
+        
+        .footer_div .footer_left .favorite {
+            height: 30px;
+            border-right: 1px dotted #8e8e8e;
+            padding: 4px 8px;
+            width: 50px;
+            display: inline-block;
+            text-align: center;
+            -webkit-box-sizing: border-box;
+        }
+        
+        .footer_div .footer_center {
+            float: left;
+            overflow: hidden;
+            max-width: 60%;
+            padding: 15px 10px;
+            height: 64px;
+            line-height: 16px;
+            -webkit-box-sizing: border-box;
+        }
+        
+        .footer_div .footer_center dl {
+            text-align: left;
+        }
+        
+        .footer_div .footer_center dl dt {
+            font-size: 14px;
+            padding-bottom: 2px;
+        }
+        
+        .footer_div .footer_right dl dd {
+            font-size: 12px;
+        }
+        
+        .footer_div .footer_right {
+            float: right;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .footer_div .footer_right .righttext {
+            padding: 10px 10px 0 0;
+            font-size: 14px;
+            float: right;
+        }
+        
+        .footer_div .footer_right .arrowimg {
+            display: block;
+            height: 64px;
+            width: 40px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 20px 11px;
+            float: right;
+        }
+        
+        .footer_div .footer_right .arrowup {
+            background-image: url(Public/myui_v1/images/Estate/arrow_white_default.png);
+        }
+        
+        .footer_div .footer_right .arrowdown {
+            background-image: url(Public/myui_v1/images/Estate/arrow_white_focus.png);
+        }
+        
+        .housedetail {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            padding-top: 64px;
+            -webkit-overflow-scrolling: touch;
+            -webkit-box-sizing: border-box;
+            padding: 76px 12px 12px 12px;
+            line-height: 22px;
+            display: none;
+            z-index: 9999;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <!--图片预览容器-->
+    <div id="imageView" class="slide-view"></div>
+    <!--右上角关闭按钮-->
+    <!--这句是原来的，调整成返回原网页-->
+    <!--<div id="right_top_close_icon" class="right_top_close_icon" onclick="window.location.href='/Estate/HouseType/index?token=tdyajl1427723483&retview=Estate%2FHouseType%2Findex&proj=e807f035-bc0b-40c0-942a-08f9639bd253';"></div>-->
+    <div id="right_top_close_icon" class="right_top_close_icon" onclick="window.location.href='全景户型.html';"></div>
+
+    <!--360按钮-->
+    <!--底部图片信息容器-->
+    <div class='footer_div ' id="footer_div" rel='0'>
+        <div class="footer_left">
+            <div class="favorite" onclick="Favorite_CurRecord(this,'39cf7fd6-367d-4c29-6c5c-3abd77c423a4')">
+                <img width="22" src='Public/myui_v1/images/Estate/collect_white_default.png' /> </div>
+        </div>
+        <div class="footer_center">
+            <dl>
+                <dt>负一层</dt>
+                <dd>户型: A3-n</dd>
+            </dl>
+        </div>
+        <div class="footer_right">
+            <div class="arrowup arrowimg" id="footer_div_arrow" >
+            </div>
+            <div class="righttext">
+                347.55㎡
+            </div>
+        </div>
+    </div>
+    <!--户型详细信息-->
+    <div class="housedetail" id="housedetail">
+    </div>
+    <script type="text/javascript" src="Public/dest/base.min.js"></script>
+    <style>
+        .slide-view {
+            background: rgb(0, 0, 0);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .pv-inner {
+            position: relative;
+            z-index: -1;
+            display: -webkit-box;
+            width: 100%;
+            height: 100%;
+            -webkit-transition: all 350ms linear;
+            -webkit-backface-visibility: hidden;
+        }
+        
+        .pv-inner li {
+            text-align: center;
+        }
+        
+        .pv-inner img {
+            max-width: 97%;
+            vertical-align: middle;
+            -webkit-transform: scale(1) translate(0px, 0px);
+            max-height: 100%;
+            visibility: visible;
+            -webkit-transition: 200ms;
+            -webkit-user-select: none;
+        }
+        
+        .slide-view .counts {
+            position: absolute;
+            top: 5%;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+        
+        .slide-view .counts .value {
+            border-radius: 9px;
+            line-height: 18px;
+            padding: 0 6px;
+            font-size: 11px;
+            display: inline-block;
+            background-color: rgba(102, 102, 102, 0.6);
+            color: rgb(241, 241, 241);
+        }
+        
+        .ui-loading {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin: -10px 0 0 -10px;
+            left: 50%;
+            top: 50%;
+        }
+        
+        .loadInco {
+            position: relative;
+            width: 17px;
+            height: 21px;
+            vertical-align: -20%;
+        }
+        
+        .blockG {
+            display: block;
+            position: absolute;
+            background-color: #ccc;
+            width: 2px;
+            height: 6px;
+            border-radius: 3px 3px 0 0;
+            -webkit-transform: scale(0.4);
+            -webkit-animation-name: fadeG;
+            -webkit-animation-duration: 0.48s;
+            -webkit-animation-iteration-count: infinite;
+        }
+        
+        @-webkit-keyframes fadeG {
+            0% {
+                background-color: #8b8c8d;
+            }
+            100% {
+                background-color: #ccc;
+            }
+        }
+        
+        #rotateG_01 {
+            left: 0;
+            top: 8px;
+            -webkit-animation-delay: 0.18s;
+            -webkit-transform: rotate(-90deg);
+        }
+        
+        #rotateG_02 {
+            left: 2px;
+            top: 3px;
+            -webkit-animation-delay: 0.24s;
+            -webkit-transform: rotate(-45deg);
+        }
+        
+        #rotateG_03 {
+            left: 8px;
+            top: 1px;
+            -webkit-animation-delay: 0.3s;
+            -webkit-transform: rotate(0deg);
+        }
+        
+        #rotateG_04 {
+            right: 2px;
+            top: 3px;
+            -webkit-animation-delay: 0.36s;
+            -webkit-transform: rotate(45deg);
+        }
+        
+        #rotateG_05 {
+            right: 0;
+            top: 8px;
+            -webkit-animation-delay: 0.42s;
+            -webkit-transform: rotate(90deg);
+        }
+        
+        #rotateG_06 {
+            right: 2px;
+            bottom: 2px;
+            -webkit-animation-delay: 0.48s;
+            -webkit-transform: rotate(135deg);
+        }
+        
+        #rotateG_07 {
+            bottom: 0;
+            left: 8px;
+            -webkit-animation-delay: 0.54s;
+            -webkit-transform: rotate(180deg);
+        }
+        
+        #rotateG_08 {
+            left: 2px;
+            bottom: 2px;
+            -webkit-animation-delay: 0.6s;
+            -webkit-transform: rotate(-135deg);
+        }
+    </style>
+    <script>
+        var ImageView = function (selector, options) {
+            // 缓存this指针
+            var self = this;
+            // 图片预览插件默认参数
+            var defaults = {
+                photos: [], // 图片地址数组
+                index: 0, // 当前显示图片索引(从0开始)
+                fade: true,
+                closeOnSingleTap: true //单击是否关闭
+            };
+            // 获取元素
+            var $el = self.el = $(selector);
+            // 在元素迭代前创建插件参数
+            var opts = self.opts = $.extend(true, defaults, options);
+            // 初始化函数
+            var init = function () {
+                self.index = opts.index;
+                self.photos = opts.photos;
+                self.zoom = 1;
+                self.zoomX = 0;
+                self.zoomY = 0;
+                self.lastContainerScroll = document.body.scrollTop;
+                self.lastTapDate = 0;
+                var $window = $(window);
+                self.width = $window.width();
+                self.height = $window.height();
+                if (self.height == 0) {
+                    self.sizeInterval = setInterval(function () {
+                        clearStatus();
+                        if (self.height != 0) {
+                            clearInterval(self.sizeInterval);
+                            sizeCallback();
+                        }
+                    }, 100);
+                } else {
+                    sizeCallback();
+                }
+            };
+            //清除状态
+            var clearStatus = function () {
+                var $window = $(window);
+                self.width = $window.width();
+                self.height = $window.height();
+                self.zoom = 1;
+                self.zoomX = 0;
+                self.zoomY = 0;
+            };
+            //重新绑定
+            var sizeCallback = function () {
+                render();
+                bind();
+                self.changeIndex(self.index, true);
+            };
+            // 渲染模板
+            var render = function () {
+                var contentHTML = [];
+                var len = self.photos.length;
+                contentHTML.push('<ul class="pv-inner" style="line-height:');
+                contentHTML.push(self.height);
+                contentHTML.push('px;">');
+                for (var i = 0; i < len; i++) {
+                    contentHTML.push('<li class="pv-img" style="width:');
+                    contentHTML.push(self.width);
+                    contentHTML.push('px;height:');
+                    contentHTML.push(self.height);
+                    contentHTML.push('px;"></li>');
+                }
+                contentHTML.push(
+                    '</ul>    <span class="ui-loading" id="J_loading"><div class="loadInco"><span class="blockG" id="rotateG_01"></span><span class="blockG" id="rotateG_02"></span><span class="blockG" id="rotateG_03"></span><span class="blockG" id="rotateG_04"></span><span class="blockG" id="rotateG_05"></span><span class="blockG" id="rotateG_06"></span><span class="blockG" id="rotateG_07"></span><span class="blockG" id="rotateG_08"></span></div></span><p class="counts"><span class="value" id="J_index">'
+                );
+                contentHTML.push(self.index + 1);
+                contentHTML.push('/');
+                contentHTML.push(len);
+                contentHTML.push('</span></p>');
+
+                $el.html(contentHTML.join(''));
+                $el.css({
+                    'opacity': 0,
+                    'height': self.height + 2 + 'px',
+                    'top': self.lastContainerScroll - 1 + 'px'
+                }).show().animate({
+                    'opacity': 1
+                }, 300);
+            };
+            // 绑定事件
+            var bind = function () {
+                self.unbind();
+                self.el.on('touchstart touchmove touchend touchcancel', function (e) {
+                    switch (e.type) {
+                        case 'touchstart':
+                            onTouchStart(e);
+                            break;
+                        case 'touchmove':
+                            e.preventDefault();
+                            onTouchMove(e);
+                            break;
+                        case 'touchcancel':
+                        case 'touchend':
+                            onTouchEnd(e);
+                            break;
+                    }
+                });
+                if (opts.closeOnSingleTap) {
+                    self.el.on('singleTap', function (e) {
+                        e.preventDefault();
+                        var now = new Date();
+                        if (now - self.lastTapDate < 500) {
+                            return;
+                        }
+                        self.lastTapDate = now;
+                        onSingleTap(e);
+                    });
+                }
+
+                'onorientationchange' in window ? $(window).on('orientationchange', onResize) : $(window).on('resize', onResize);
+            };
+            var getDist = function (x1, y1, x2, y2) {
+                return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2), 2);
+            };
+
+            // 滑动开始事件
+            var onTouchStart = function (e) {
+                if (e.touches && e.touches.length >= 2) {
+                    var img = self.getImg();
+                    img.style.webkitTransitionDuration = '0';
+                    self.isDoubleZoom = true;
+                    self.doubleZoomOrg = self.zoom;
+                    self.doubleDistOrg = getDist(e.touches[0].pageX, e.touches[0].pageY, e.touches[1].pageX, e.touches[
+                        1].pageY);
+                    return;
+                }
+                e = e.touches ? e.touches[0] : e;
+                self.isDoubleZoom = false;
+                self.startX = e.pageX;
+                self.startY = e.pageY;
+                self.orgX = e.pageX;
+                self.orgY = e.pageY;
+                self.hasMoved = false;
+                if (self.zoom != 1) {
+                    self.zoomX = self.zoomX || 0;
+                    self.zoomY = self.zoomY || 0;
+                    var img = self.getImg();
+                    if (img) {
+                        img.style.webkitTransitionDuration = '0';
+                    }
+                    self.drag = true;
+                } else {
+                    if (self.photos.length == 1) {
+                        return;
+                    }
+                    self.el.find('.pv-inner').css('-webkitTransitionDuration', '0');
+                    self.transX = -self.index * self.width;
+                    self.slide = true;
+                }
+            };
+            // 滑动中事件
+            var onTouchMove = function (e) {
+                if (e.touches && e.touches.length >= 2) {
+                    var newDist = getDist(e.touches[0].pageX, e.touches[0].pageY, e.touches[1].pageX, e.touches[
+                        1].pageY);
+                    self.zoom = newDist * self.doubleZoomOrg / self.doubleDistOrg;
+                    var img = self.getImg();
+                    img.style.webkitTransitionDuration = '0';
+                    if (self.zoom < 1) {
+                        self.zoom = 1;
+                        self.zoomX = 0;
+                        self.zoomY = 0;
+                        img.style.webkitTransitionDuration = '200ms';
+                    } else if (self.zoom > self.getScale(img) * 2) {
+                        self.zoom = self.getScale(img) * 2;
+                    }
+                    img.style.webkitTransform = "scale(" + self.zoom + ") translate(" + self.zoomX + "px," +
+                        self.zoomY + "px)";
+                    return;
+                }
+                if (self.isDoubleZoom) {
+                    return;
+                }
+                e = e.touches ? e.touches[0] : e;
+                if (!self.hasMoved && (Math.abs(e.pageX - self.orgX) > 5 || Math.abs(e.pageY - self.orgY) > 5)) {
+                    self.hasMoved = true;
+                }
+                if (self.zoom != 1) {
+                    var deltaX = (e.pageX - self.startX) / self.zoom;
+                    var deltaY = (e.pageY - self.startY) / self.zoom;
+                    self.startX = e.pageX;
+                    self.startY = e.pageY;
+                    var img = self.getImg();
+                    var newWidth = img.width * self.zoom,
+                        newHeight = img.height * self.zoom;
+                    var borderX = (newWidth - self.width) / 2 / self.zoom,
+                        borderY = (newHeight - self.height) / 2 / self.zoom;
+                    if (borderX >= 0) {
+                        if (self.zoomX < -borderX || self.zoomX > borderX) {
+                            deltaX /= 3;
+                        }
+                    }
+                    if (borderY > 0) {
+                        if (self.zoomY < -borderY || self.zoomY > borderY) {
+                            deltaY /= 3;
+                        }
+                    }
+                    self.zoomX += deltaX;
+                    self.zoomY += deltaY;
+                    if ((self.photos.length == 1 && newWidth < self.width)) {
+                        self.zoomX = 0;
+                    } else if (newHeight < self.height) {
+                        self.zoomY = 0;
+                    }
+                    img.style.webkitTransform = "scale(" + self.zoom + ") translate(" + self.zoomX + "px," +
+                        self.zoomY + "px)";
+                } else {
+                    if (!self.slide) {
+                        return;
+                    }
+                    var deltaX = e.pageX - self.startX;
+                    if (self.transX > 0 || self.transX < -self.width * (self.photos.length - 1)) {
+                        deltaX /= 4;
+                    }
+                    self.transX = -self.index * self.width + deltaX;
+                    self.el.find('.pv-inner').css('-webkitTransform', 'translateX(' + self.transX + 'px)');
+                }
+            };
+            // 滑动结束事件
+            var onTouchEnd = function (e) {
+                if (self.isDoubleZoom) {
+                    return;
+                }
+                if (!self.hasMoved) {
+                    return;
+                }
+                if (self.zoom != 1) {
+                    if (!self.drag) {
+                        return;
+                    }
+                    var img = self.getImg();
+                    img.style.webkitTransitionDuration = '200ms';
+                    var newWidth = img.width * self.zoom,
+                        newHeight = img.height * self.zoom;
+                    var borderX = (newWidth - self.width) / 2 / self.zoom,
+                        borderY = (newHeight - self.height) / 2 / self.zoom;
+
+                    var len = self.photos.length;
+                    if (len > 1 && borderX >= 0) {
+                        var updateDelta = 0;
+                        var switchDelta = self.width / 6;
+                        if (self.zoomX < -borderX - switchDelta / self.zoom && self.index < len - 1) {
+                            updateDelta = 1;
+                        } else if (self.zoomX > borderX + switchDelta / self.zoom && self.index > 0) {
+                            updateDelta = -1;
+                        }
+                        if (updateDelta != 0) {
+                            self.scaleDown(img);
+                            self.changeIndex(self.index + updateDelta);
+                            return;
+                        }
+                    }
+                    if (borderX >= 0) {
+                        if (self.zoomX < -borderX) {
+                            self.zoomX = -borderX;
+                        } else if (self.zoomX > borderX) {
+                            self.zoomX = borderX;
+                        }
+                    }
+                    if (borderY > 0) {
+                        if (self.zoomY < -borderY) {
+                            self.zoomY = -borderY;
+                        } else if (self.zoomY > borderY) {
+                            self.zoomY = borderY;
+                        }
+                    }
+                    if (self.isLongPic(img) && Math.abs(self.zoomX) < 10) {
+                        img.style.webkitTransform = "scale(" + self.zoom + ") translate(0px," + self.zoomY +
+                            "px)";
+                        return;
+                    } else {
+                        img.style.webkitTransform = "scale(" + self.zoom + ") translate(" + self.zoomX + "px," +
+                            self.zoomY + "px)";
+                    }
+                    self.drag = false;
+                } else {
+                    if (!self.slide) {
+                        return;
+                    }
+                    var deltaX = self.transX - (-self.index * self.width);
+                    var updateDelta = 0;
+                    if (deltaX > 50) {
+                        updateDelta = -1;
+                    } else if (deltaX < -50) {
+                        updateDelta = 1;
+                    }
+                    self.changeIndex(self.index + updateDelta);
+                    self.slide = false;
+                }
+            };
+            //尺寸定时器
+            var resizeTimer = null;
+            // 尺寸大小改变事件
+            var onResize = function (e) {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function () {
+                    if (self.zoom != 1) {
+                        self.scaleDown(self.getImg());
+                    }
+                    clearStatus();
+                    render();
+                    self.changeIndex(self.index, true);
+                }, 600);
+            };
+            // 单击事件
+            var onSingleTap = function (e) {
+                self.destroy(e);
+            };
+            // 调用初始化函数
+            init();
+        };
+        // 销毁控件时，解除绑定的事件
+        ImageView.prototype.unbind = function () {
+            var self = this;
+            self.el.off();
+        };
+        // 关闭图片预览插件
+        ImageView.prototype.destroy = function (e) {
+            var self = this;
+            if (this.el) {
+                self.unbind();
+                self.el.animate({
+                    'opacity': 0
+                }, 300, 'linear', function () {
+                    if (self.el) {
+                        self.el.html('').hide();
+                        self.el = null;
+                    }
+                });
+                self.opts.onClose && self.opts.onClose(self.photos, self.index);
+            }
+        };
+        // 通过索引获取img元素
+        ImageView.prototype.getImg = function (index) {
+            var img = this.el.find('li').eq(index || this.index).find('img');
+            if (img.size() == 1) {
+                return img[0];
+            } else {
+                return null;
+            }
+        };
+        // 跳转到指定索引图片
+        ImageView.prototype.changeIndex = function (index, force) {
+            var self = this;
+            if (self.indexChangeLock) {
+                return;
+            }
+            if (index < 0) {
+                index = 0;
+            } else if (index >= self.photos.length) {
+                index = self.photos.length - 1;
+            }
+            var changed = self.index != index;
+            self.index = index;
+            var inner = self.el.find('.pv-inner');
+            inner.css({
+                '-webkitTransitionDuration': force ? '0' : '200ms',
+                '-webkitTransform': 'translateX(-' + index * this.width + 'px)'
+            });
+            var li = inner.find('li').eq(index);
+            var imgs = li.find('img');
+            if (!imgs.size()) {
+                self.el.find('#J_loading').show();
+                if (typeof self.photos[index] != 'undefined') {
+                    var img = new Image();
+                    img.onload = function () {
+                        if (self.el == null) {
+                            return;
+                        }
+                        img.onload = null;
+                        self.el.find('#J_loading').hide();
+                        img.style.webkitTransform = '';
+                        img.style.opacity = '';
+                        if (self.isLongPic(img)) {
+                            setTimeout(function () {
+                                self.scaleUp(img);
+                            }, 0);
+                        }
+                    };
+                    img.ontimeout = img.onerror = function () {
+                        li.html('<i style="color:white;">This image is broken, try again later.</i>');
+                        self.el.find('#J_loading').hide();
+                    }
+                    img.style.webkitBackfaceVisibility = 'hidden';
+                    img.style.opacity = '0';
+                    img.src = self.getImgUrl(index);
+                    li.html('').append(img);
+                    self.preload(index - 1);
+                    self.preload(index + 1);
+                } else {
+                    self.indexChangeLock = true;
+                }
+            }
+            if (changed || force) {
+                self.el.find('#J_index').html((index + 1) + '/' + self.photos.length);
+                self.opts.onIndexChange && self.opts.onIndexChange(img, self.photos, index);
+            }
+            setTimeout(function () {
+                self.memoryClear();
+            }, 0);
+        };
+        // 清除html元素，释放内存
+        ImageView.prototype.memoryClear = function () {
+            var li = this.el.find('.pv-img');
+            var i = this.index - 10;
+            while (i >= 0) {
+                if (li.eq(i).html() == '')
+                    break;
+                li.eq(i).html('');
+                i--;
+            }
+            i = this.index + 10;
+            while (i < li.size()) {
+                if (li.eq(i).html() == '')
+                    break;
+                li.eq(i).html('');
+                i++;
+            }
+        };
+        // 图片预加载
+        ImageView.prototype.preload = function (index) {
+            if (index < 0 || index >= this.photos.length || !this.getImg(index)) {
+                return;
+            }
+            var url = this.getImgUrl(index);
+            if (url) {
+                var img = new Image();
+                img.src = url;
+            }
+        };
+        // 通过索引获取图片地址
+        ImageView.prototype.getImgUrl = function (index) {
+            if (index < 0 || index >= this.photos.length || !this.photos[index]) {
+                return "";
+            }
+            return this.photos[index];
+        };
+        ImageView.prototype.scaleUp = function (img) {
+            var scale = this.getScale(img);
+            if (scale > 1) {
+                img.style.webkitTransform = "scale(" + scale + ")";
+                img.style.webkitTransition = "200ms";
+            }
+            this.zoom = scale;
+            this.afterZoom(img);
+        };
+        ImageView.prototype.scaleDown = function (img) {
+            this.zoom = 1;
+            this.zoomX = 0;
+            this.zoomY = 0;
+            this.doubleDistOrg = 1;
+            this.doubleZoomOrg = 1;
+            img.style.webkitTransform = "";
+            this.afterZoom(img);
+        };
+        // 获取图片的缩放比例
+        ImageView.prototype.getScale = function (img) {
+            var self = this;
+            if (self.isLongPic(img)) {
+                return self.width / img.width;
+            } else {
+                var h = img.naturalHeight,
+                    w = img.naturalWidth;
+                var hScale = h / img.height,
+                    wScale = w / img.width;
+                if (hScale > wScale) {
+                    return wScale;
+                } else {
+                    return hScale;
+                }
+            }
+        };
+        // 图片缩放后回调函数
+        ImageView.prototype.afterZoom = function (img) {
+            if (this.zoom > 1 && this.isLongPic(img)) {
+                var newHeight = img.height * this.zoom;
+                var borderY = (newHeight - this.height) / 2 / this.zoom;
+                if (borderY > 0) {
+                    this.zoomY = borderY;
+                    img.style.webkitTransform = "scale(" + this.zoom + ") translate(0px," + borderY + "px)";
+                }
+            }
+        };
+        // 判断是否为长图片
+        ImageView.prototype.isLongPic = function (img) {
+            return img.height / img.width >= 3.5
+        };
+    </script>
+    <style>
+        .slide-view {
+            z-index: 9988;
+        }
+        
+        .slide-view .counts {
+            top: 50px;
+            z-index: 9999;
+        }
+        
+        .slide-view .counts .value {
+            color: #fff;
+            border-radius: 0px;
+            background-color: transparent;
+        }
+    </style>
+    <script>
+        $(function () {
+            var imgs = [];
+            var imgsnames = [];
+            imgs.push("Public/myui_v1/images/manage/ABMN.jpg");
+            // 若图片加载错误，会提示 图片损坏，请重新加载
+            imgsnames.push("ABMN"); //初始化图片
+            var imgview = new ImageView('#imageView', {
+                'photos': imgs,
+                closeOnSingleTap: false,
+                onIndexChange: function (img, photos, index) {
+                    var $J_index = $('#J_index');
+                    var titletext = $J_index.html();
+                    $J_index.html(imgsnames[index] + '  ' + titletext);
+                }
+            });
+            //绑定底部箭头事件(点击显示户型详细)
+            $('#footer_div_arrow').bind('click', function () {
+                var $this = $(this);
+                if ($this.hasClass('arrowup')) {
+                    $this.removeClass('arrowup').addClass('arrowdown');
+                    $('#footer_div').css({
+                        'top': 0,
+                        'bottom': 'auto'
+                    });
+                    $('#housedetail').show();
+                } else {
+                    $this.removeClass('arrowdown').addClass('arrowup');
+                    $('#footer_div').css({
+                        'bottom': 0,
+                        'top': 'auto'
+                    });
+                    $('#housedetail').hide();
+                }
+            });
+            var isshow = true;
+            //绑定图片容器单击事件
+            $('#imageView').bind('click', function () {
+                if (isshow) {
+                    $('#footer_div').hide();
+                    $('#J_index').hide();
+                    $('#right_top_close_icon').hide();
+                    isshow = false;
+                } else {
+                    $('#footer_div').show();
+                    $('#J_index').show();
+                    $('#right_top_close_icon').show();
+                    isshow = true;
+                }
+            });
+        });
+        //收藏户型
+        function Favorite_CurRecord(obj, id) {
+            var token = "tdyajl1427723483";
+            var islogin = "";
+            var isdemo = "";
+            if (islogin == '0') {
+                if (isdemo === "1") {
+                    window.location.href ="http://www.myscrm.cn?g=ApplibWap&m=Demo&a=newlogin&token=tdyajl1427723483&isreturn=1&openid=";
+                } else {
+                    window.location.href ="http://www.myscrm.cn?g=ApplibWap&m=Sales&a=newlogin&token=tdyajl1427723483&isreturn=1&openid=";
+                }
+                return;
+            }
+
+            var submitData = {
+                token: "tdyajl1427723483",
+                lpguid: $("#lpguid").val(),
+                proj: "e807f035-bc0b-40c0-942a-08f9639bd253",
+                fans_id: "",
+                hxid: id
+            };
+
+            $(obj).attr('disabled', 'disabled');
+            $.post("/Estate/HouseType/AddFav?token=tdyajl1427723483&proj=e807f035-bc0b-40c0-942a-08f9639bd253",
+                submitData,
+                function (data) {
+                    $(obj).removeAttr('disabled');
+                    var backdata = eval('(' + data + ')');
+                    if (backdata.errno == 0) {
+                        if (backdata.ok == 1) {
+                            $('img', obj).attr('src', 'Public/myui_v1/images/Estate/Favorite_ok.png');
+                        } else {
+                            $('img', obj).attr('src', 'Public/myui_v1/images/Estate/collect_white_default.png');
+                        }
+                    } else {
+                        alert(backdata.msg);
+                        if (backdata.backUrl) {
+                            window.location.href = backdata.backUrl;
+                        }
+                    }
+                });
+        }
+    </script>
+</body>
+
+</html>

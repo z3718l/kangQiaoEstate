@@ -1,0 +1,457 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+body {
+    font-size: 12px;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+    background: #FFF;
+}
+
+#PanoramicApartment_topnav_pos {
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    z-index: 980809;
+    top: 0px;
+    left: 0px;
+}
+
+#PanoramicApartment_topnav {
+    width: 196px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    text-align: center;
+    background: #FFF;
+    padding: 0;
+    text-align: center;
+    margin: auto;
+    border: 1px #33cc66 solid;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#PanoramicApartment_topnav_main {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+    text-align: center;
+    background: #FFF;
+    padding: 0;
+    overflow: hidden;
+    margin-top: 15px;
+    position: fixed;
+}
+
+#PanoramicApartment_topnav ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+#PanoramicApartment_topnav ul li {
+    width: 50%;
+    overflow: hidden;
+    float: left;
+}
+
+#PanoramicApartment_topnav ul li.current {
+    background: #33cc66;
+    color: #FFF;
+}
+
+#wrapper_page_iscroll_ {
+    /*position:fixed; 
+   top:65px;left:12px;right:12px;*/
+    margin-bottom: 50px;
+    z-index: 1;
+    width: auto;
+    margin-left: 12px;
+    margin-right: 12px;
+    /*overflow-x:hidden;*/
+}
+
+.iScrollHover {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+}
+
+#scroller_page_iscroll_ {
+    /*  position:absolute; z-index:1;*/
+    /*  -webkit-touch-callout:none;*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    padding: 0;
+    margin: 0px;
+}
+
+#scroller_page_iscroll_ ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    margin: auto;
+}
+
+
+/*#scroller_page_iscroll_ li {
+    padding:0 10px;
+    height:60px;
+    line-height:60px;
+    border-bottom:1px solid #ccc;
+    border-top:1px solid #fff;
+    background-color:#fff;
+    font-size:14px;
+}
+
+*/
+
+.scroller_page_iscroll_ li {
+    line-height: 60px;
+    border-bottom: 1px solid #ddd;
+    /*  border-top:1px solid #fff;*/
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.text_blue_title_p {
+    color: rgb(51, 51, 51);
+    /* font-weight: bold;*/
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}
+
+.text_black_title_p {
+    color: black;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    margin-top: 4px;
+}
+
+.text_black_title_desc {
+    color: rgb(106, 106, 106);
+    font-weight: normal;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    margin-top: 7px;
+}
+
+#loadmore {
+    text-align: center;
+    border-top: 2px solid #ccc;
+    border-bottom: none;
+}
+
+#showList_content_ li:first-child {
+    border-top: none;
+}
+
+#showList_content_ li:last-child {
+    border-bottom: none;
+    border-top: none;
+}
+
+#thelist_page_iscroll_ li:last-child {
+    border-bottom: none;
+    border-top: none;
+}
+
+#thelist_page_iscroll_ .panoram_list_title {
+    background: #FFF;
+    height: 49px;
+    /*line-height:49px;*/
+    color: rgb(51, 204, 102);
+    font-size: 16px;
+    border-bottom: none;
+    border-bottom: 1px solid #33cc66;
+}
+
+#thelist_page_iscroll_ .panoram_list_title .text_ {
+    height: 48px;
+    border-bottom: 2px solid #33cc66;
+    padding: 0px;
+    display: inline-block;
+}
+
+.p_showchoies_td {
+    height: 65px;
+    background: url("../images/Estate/item_bg.png");
+    background-size: 100% 100%;
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+}
+
+.p_showchoies_td_2 {
+    height: 65px;
+    background: url("../images/Estate/item_bg2.png");
+    background-size: 100% 100%;
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+}
+
+.p_showchoies_td_2 .item_ img {
+    height: 25px;
+}
+
+.p_showchoies_td_2 .item_ {
+    width: 50%;
+    text-align: center;
+    color: rgb(51, 51, 51);
+    padding-top: 10px;
+}
+
+.p_showchoies_td .item_ img {
+    height: 25px;
+}
+
+.p_showchoies_td .item_ {
+    width: 50%;
+    text-align: center;
+    color: rgb(51, 51, 51);
+    padding-top: 10px;
+}
+
+.top_table {
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;
+    border: none;
+}
+
+.top_table .top_table_left {
+    text-align: left;
+    width: 30px;
+}
+
+.top_table .top_table_right_text {
+    width: 60px;
+    text-align: right;
+    line-height: 30px;
+    height: 30px;
+    color: #33cc66;
+    font-size: 14px;
+    padding-right: 12px;
+}
+
+.top_table .top_table_right_img {
+    width: 25px;
+    height: 30px;
+    text-align: left;
+}
+
+.top_s_icon {
+    background: url(../images/Estate/triangle_list.png);
+    width: 15px;
+    height: 5px;
+    z-index: 99999999;
+    margin: auto;
+    position: fixed;
+    margin-top: -5px;
+}
+
+.right_top_close_icon {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    position: fixed;
+    right: 00px;
+    top: 0px;
+    z-index: 9999;
+    background: url('../images/Estate/close_icon.png') no-repeat center center;
+    background-size: 100% 100%;
+    filter: alpha(Opacity=100);
+    -moz-opacity: 1.0;
+    opacity: 1.0
+}
+
+.top_fff_bg {
+    background: #FFF;
+    filter: alpha(Opacity=80);
+    -moz-opacity: 0.80;
+    opacity: 0.80;
+    height: 55px;
+    position: fixed;
+    z-index: 9988;
+    width: 100%;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+body a {
+    text-decoration: none;
+}
+
+table,
+tr,
+td {
+    border-width: 0px;
+}
+
+.bt_itemli:active {
+    background: #FFF;
+    color: #33cc66;
+}
+
+.back3601 {
+    display: inline-block;
+    color: #33CC66;
+    font-size: 14px;
+    text-align: right;
+    height: 25px;
+    width: 120px;
+    top: 12px;
+    right: 12px;
+    z-index: 9898989;
+    position: absolute;
+}
+
+.backhuxing {
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    background: url("../images/Estate/icon_return.png");
+    background-size: 36px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 15px;
+    left: 12px;
+    z-index: 9898989;
+}
+
+.currentselect {
+    background: #ccc;
+    color: #33cc66;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.currentselect a {
+    color: #33cc66;
+}
+
+.hxname {
+    color: rgb(51, 51, 51);
+    font-size: 16px;
+    position: absolute;
+    width: 100%;
+    height: 16px;
+    bottom: 45px;
+    left: 0;
+    /* text-shadow:1px 1px #999;*/
+}
+
+.bt_item a {
+    color: #333333;
+    font-size: 16px;
+}
+
+.bt_item {
+    width: 100%;
+    height: 100%;
+    line-height: 50px;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 0px solid #ccc;
+    background: URL('../images/Estate/view_bg.png');
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    padding: 0;
+    vertical-align: middle;
+    z-index: 8888;
+}
+
+.bt_item ul {
+    padding: 10px;
+    margin: 0;
+    list-style-type: none;
+    text-align: center;
+    vertical-align: middle;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.bt_itemli {
+    border-right: 1px solid #ddd;
+    margin: 0 auto;
+    width: 100%;
+    overflow: hidden;
+    float: left;
+    font-size: 16px;
+}
+
+.bt_item ul div li:last-child {
+    border-right: none;
+}
+
+.bt_item ul li.current {
+    color: #33cc66;
+    /* font-weight: bold;*/
+}
+
+.showabl {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 9999;
+    height: 30px;
+    overflow: hidden;
+}
+
+.btn_st {
+    height: 25px;
+    margin-top: 5px;
+    width: 70px;
+    font-size: 12px;
+    box-shadow: 0 1px #CCCCCC;
+    -moz-box-shadow: 0 1px #CCCCCC;
+    -webkit-box-shadow: 0 1px #CCCCCC;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    vertical-align: bottom;
+    overflow: visible;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #f1f1f1;
+    background-image: -webkit-linear-gradient(bottom, #CCC 0%, #E5E5E5 3%, #FFF 97%, #FFF 100%);
+    background-image: -moz-linear-gradient(bottom, #CCC 0%, #E5E5E5 3%, #FFF 97%, #FFF 100%);
+    background-image: -ms-linear-gradient(bottom, #CCC 0%, #E5E5E5 3%, #FFF 97%, #FFF 100%);
+    color: #000;
+    border: 1px solid #AAA;
+    text-shadow: 0 1px #FFFFFF;
+}
+
+.btn_st:active {
+    background: #E5E5E5;
+    background-image: -webkit-linear-gradient(bottom, #999 0%, #fff 3%, #CCC 97%, #E5E5E5 100%);
+    background-image: -moz-linear-gradient(bottom, #999 0%, #fff 3%, #CCC 97%, #E5E5E5 100%);
+    background-image: -ms-linear-gradient(bottom, #999 0%, #fff 3%, #CCC 97%, #E5E5E5 100%);
+    text-decoration: none;
+    color: #000;
+}

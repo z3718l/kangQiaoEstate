@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>楼盘详情</title>
+    <link href="Public/myui_v1/css/mysoft_public.css" rel="stylesheet" type="text/css">
+    <style>
+        .yykf_btn {
+            color: #FFF;
+            text-align: center;
+            margin-top: 12px;
+            margin-right: 9px;
+            background: rgb(51, 204, 102);
+            border-radius: 5px;
+            padding: 7px;
+            width: 120px;
+            height: 25px;
+            line-height: 25px;
+            float: left;
+            overflow: hidden;
+            float: right;
+            font-size: 17px;
+            border: 1px solid #33cc66;
+        }
+        
+        .yykf_btn:hover {
+            background: #5cb85c;
+        }
+        
+        .yykf_btn:focus {
+            background: #5cb85c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        
+        a,
+        img {
+            border: 0;
+        }
+        
+        body {
+            font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+        }
+        /* iphonebox */
+        
+        #wrapper1 {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .swipe {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .swipe #pagenavi {
+            position: absolute;
+            left: 0;
+            bottom: 0px;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+        }
+        
+        #pagenavi .bgcontainer {
+            background-color: #333;
+            left: 0px;
+            top: 0px;
+            opacity: 0.4;
+            height: 30px;
+            width: 100%;
+        }
+        
+        #pagenavi .innerpanel {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            text-align: center;
+            height: 30px;
+            width: 100%;
+        }
+        
+        .swipe #pagenavi a {
+            width: 14px;
+            height: 14px;
+            background: #000;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            margin: 8px 4px;
+            overflow: hidden;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 0;
+            text-indent: -10em;
+        }
+        
+        .swipe #pagenavi a.active {
+            background: #fff;
+            opacity: 0.6;
+        }
+        
+        .swipe ul {
+            white-space: nowrap;
+            font-size: 0;
+            line-height: 0;
+        }
+        
+        .swipe li {
+            display: inline-block;
+            vertical-align: top;
+            background-size: 100% 100%;
+            width: 100%;
+        }
+        
+        .swipe li img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body onselectstart="return true;" ondragstart="return false;" style="background: #ededed;">
+    <div id="insert1" style="z-index: 10000; position: fixed; top: 20px;"></div>
+    <div class="swipe" id="swipe">
+        <ul id="slider">
+            <li>
+                <img src='Public\myui_v1\images\Estate\carousel_01.jpg' onerror="this.src='Public/myui_v1/images/Estate_Err_Img.png'" />
+            </li>
+            <li>
+                <img src='Public\myui_v1\images\Estate\carousel_02.jpg' onerror="this.src='Public/myui_v1/images/Estate_Err_Img.png'" />
+            </li>
+            <li>
+                <img src='Public\myui_v1\images\Estate\carousel_03.jpg' onerror="this.src='Public/myui_v1/images/Estate_Err_Img.png'" />
+            </li>
+        </ul>
+        <div id="pagenavi">
+            <div class="bgcontainer"></div>
+            <div class="innerpanel">
+                <a href="javascript:void(0);" class="active">0</a><a href="javascript:void(0);">1</a><a href="javascript:void(0);">2</a>                </div>
+        </div>
+    </div>
+    <!--swipe end-->
+    <div class="clr" style="clear: both;"></div>
+    <div class="wrapper">
+        <div style="clear: both; height: 68px;">
+            <div id="float" class="round_mysoft_call_div" style="clear: both;">
+                <ul>
+                    <li class="phone_button">
+                        <a style="text-decoration:none;outline: none; -webkit-user-select: none; -webkit-text-size-adjust: none; -webkit-tap-highlight-color: transparent; border: none; color: #33cc66; font-size: 17px;"
+                            href="tel:0371-55626666">
+                            <img style="vertical-align: sub; margin-right: 7px;" width="22" height="22" src='Public/myui_v1/images/Estate/icon_tel.png'
+                            />电话咨询</a>
+                    </li>
+                    <li class="seehouse_button" onclick="goUrl('预约看房.html')">
+                        <img width="22" height="22" style="vertical-align: sub; margin-right: 7px;" src='Public/myui_v1/images/Estate/new_r3_c12.png'
+                        />预约看房
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cardexplain" style="clear: both;">
+            <ul class="round_mysoft">
+                <li class="title mb jbinfo" style="border: none;">
+                    <img height="25" style="vertical-align: text-bottom; margin-right: 6px;" src='Public/myui_v1/images/Estate/icon06.png' />                    基本信息
+                    <font style='float: right; color: #33cc66;'>在售</font>
+                </li>
+                <li class='content_1 content_'>
+                    <table class="table_jbinfo_">
+                        <tr>
+                            <td nowrap="nowrap" style="width: 75px;">楼盘名称：</td>
+                            <td>康桥林溪湾 </td>
+                        </tr>
+                        <tr>
+                            <td>楼盘价格：</td>
+                            <td>
+                                一房一价</td>
+                        </tr>
+                        <tr>
+                            <td>主推户型：</td>
+                            <td>林溪湾：天阔联排、赤金双拼、新派联排、电梯叠墅；溪棠：三室两厅两卫、三室两厅一卫。</td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+            <ul class="round_mysoft">
+                <li class="title mb jbinfo" style="border-width: 0px;">
+                    <img height="25" style="vertical-align: text-bottom; margin-right: 10px;" src='Public/myui_v1/images/Estate/icon01.png'
+                    />楼盘地址</li>
+                <li class="content_2 content_" style="padding: 5px 12px; border-width: 0px;">
+                    <!--<a href="http://map.baidu.com/mobile/webapp/place/list/qt=s&wd=郑州·龙湖·湖滨路与祥安路交汇处/vt=map">
+                        <img src="http://api.map.baidu.com/staticimage?height=140&amp;center=113.71010139799,34.615977386626&amp;markers=113.71010139799,34.615977386626&amp;zoom=18&amp;markerStyles=s,A,0xff0000&ruu=40117"
+                            style="max-height: 180px; min-height:100px; max-width: 100%; width: 100%">-->
+                    <a href=''>
+                        <img src="Public/myui_v1/images/Estate/staticimage.png" style="max-height: 180px; min-height:100px; max-width: 100%; width: 100%">
+                        <table width="100%" style="table-layout: fixed; margin: 10px 0;">
+                            <tr>
+                                <td width="20">
+                                    <img height="16" style="vertical-align: sub; margin-right: 12px;" src='Public/myui_v1/images/Estate/icon_map.png' /></td>
+                                <td style="font-size: 14px; color:#6a6a6a;">郑州·龙湖·湖滨路与祥安路交汇处 </td>
+                            </tr>
+                        </table>
+                    </a>
+                    <div style="clear: both;"></div>
+                </li>
+            </ul>
+            <style>
+                .round_mysoft {
+                    -webkit-tap-highlight-color: #FFF;
+                }
+                
+                .content_88 video {
+                    background: #FFF;
+                }
+            </style>
+            <ul class="round_mysoft">
+                <li class="title mb jbinfo">
+                    <img height="25" style="vertical-align: text-bottom; margin-right: 12px;" src='Public/myui_v1/images/Estate/icon04.png'
+                    />楼盘介绍</li>
+                <li class="content_3 content_">
+                    <div class="divcontent_3">
+                        <p><span style="font-family: 微软雅黑,Microsoft YaHei; ">林溪湾位于新郑市龙湖镇湖滨路与祥安路交汇处,由康桥地产投资运营，郑州新兴置业有限公司开发建设，项目总占地650亩，有类独、双拼、联排、叠墅等户型。林溪湾由郑州新兴置业力邀加拿大ADS建筑规划公司、景观设计公司香港贝尔高林等业内著名单位，联合打造世界级低密豪宅的中原样板。林溪湾的物业服务由同步国际的一级资质物业服务公司——太平世家提供，太平世家也是中原首个加盟“金钥匙”的物业公司。</span></p>
+                        <p><br/></p>
+                    </div>
+                </li>
+                <li class="title_bottom mb " onclick="showorhide_text('divcontent_3',this)" rel='0'>
+                    <img width="20" id="imgcontent_3" style="vertical-align: sub; margin-top: 5px;" src='Public/myui_v1/images/Estate/icon_down_default.png'
+                    />
+                </li>
+            </ul>
+            <ul class="round_mysoft">
+                <li class="title mb jbinfo">
+                    <img height="25" style="vertical-align: text-bottom; margin-right: 12px;" src='Public/myui_v1/images/Estate/icon05.png'
+                    />区位交通</li>
+                <li class="content_4 content_">
+                    <div class="divcontent_4">
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">BRT直达，地铁2号线途经项目门前，郑新快速通道已经开通，大学南路即将贯穿南北，京广快速路二期工程即将完工，紫荆山南路已经开工；项目距离港区交通便利，10分钟到达新郑国际机场。</span></p>
+                    </div>
+                </li>
+                <li class="title_bottom mb licontent_4 " onclick="showorhide_text('divcontent_4',this)" rel='0'>
+                    <img width="20" id="imgcontent_4" style="vertical-align: sub; margin-top: 5px;" src='Public/myui_v1/images/Estate/icon_down_default.png'
+                    />
+                </li>
+            </ul>
+            <ul class="round_mysoft">
+                <li class="title mb jbinfo">
+                    <img height="25" style="vertical-align: text-bottom; margin-right: 12px;" src='Public/myui_v1/images/Estate/icon02.png'
+                    />周边配套
+                </li>
+                <li class="content_5 content_">
+                    <div class="divcontent_5">
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">幼儿园:郑州实验幼儿园、教工幼儿园。</span></p>
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">小学：伊河路小学、纬五路一小、新郑市实验小学。<br/></span></p>
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">中学：郑州一中、郑州六中、河南省外国语中学、郑州四中、郑州十六中、郑大一附中、郑州十四中、郑州二十四中、郑州十二中、郑州三中、郑州八中、郑州五十七中。<br/></span></p>
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">大学:中原工学院、升达大学、经济干部管理学院、职工医学院、河南省经贸学院、河南省纺织高等专科学校、河南省检查官学院、国家法官学院河南分院等</span></p>
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">银行:中国农业银行、郑州市农村合作信用社、中国建设银行、兴业银行、中国工商银行、中国银行。</span></p>
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; "></span></p>
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">医院:河南省第二人民医院、新郑市第三人民医院 </span></p>
+                        <p><span style="font-family: 微软雅黑, Microsoft YaHei; ">其他:龙湖镇邮政所</span></p>
+                        <p><br/></p>
+                    </div>
+                </li>
+                <li class="title_bottom mb licontent_5" onclick="showorhide_text('divcontent_5',this)" rel='0'>
+                    <img width="20" id="imgcontent_5" style="vertical-align: sub; margin-top: 5px;" src='Public/myui_v1/images/Estate/icon_down_default.png'
+                    />
+                </li>
+            </ul>
+        </div>
+        <style>
+            .div2 {
+                top: 0px;
+                z-index: 99999999;
+                position: fixed;
+                _position: absolute;
+            }
+            
+            .video-box {
+                width: 90%;
+                margin: auto;
+                margin-bottom: 12px;
+            }
+        </style>
+        <script type="text/javascript" src="Public/dest/base.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //得到窗口高度
+                var cheight = window.innerWidth;
+                //得到 nav 元素的宽度
+                var navWidth = $("#nav").width();
+                //得到 nav 该 margin-right 多少
+                var mr_px = (cheight - navWidth) / 2;
+                $("#nav").css('margin-right', mr_px);
+
+                var lis = $("#slider li");
+                lis.width($(window).width());
+                $(window).bind("resize", function () {
+                    lis.width($(window).width());
+                    $("#slider").width(lis.width() * lis.size());
+                    myscroll.refresh();
+                });
+                $("#slider").width(lis.width() * lis.size());
+                var myscroll = new iScroll("swipe", {
+                    scrollX: true,
+                    scrollY: false,
+                    snap: "li",
+                    snapSpeed: 100,
+                    hScrollbar: false,
+                    onScrollEnd: function () {
+                        setNum(myscroll.x)
+                    }
+                });
+
+                function setNum(x) {
+                    var ind = Math.round(Math.abs(x / lis.width()));
+                    var dots = $("#pagenavi .innerpanel a");
+                    dots.removeClass("active");
+                    dots.eq(ind).addClass("active");
+                }
+            });
+
+            function goUrl(gourl) {
+                window.location.href = gourl;
+            }
+
+            function showorhide(classStr, obj) {
+                var rel = $(obj).attr('rel');
+                if (rel == '0') {
+                    $(obj).attr('rel', '1');
+                    $('img', obj).attr('src', 'Public/myui_v1/images/Estate/icon_down_focus.png');
+                    $('.' + classStr).show();
+                } else {
+                    $(obj).attr('rel', '0');
+                    $('img', obj).attr('src', 'Public/myui_v1/images/Estate/icon_down_default.png');
+                    $('.' + classStr).hide();
+                }
+            }
+            var thheight = 83;
+            window.onload = function () {
+                var _height = $(".divcontent_3").height();
+                if (_height > thheight) {
+                    $(".divcontent_3").css("height", thheight);
+                } else {
+                    $("#imgcontent_3").hide();
+                    $("#imgcontent_3").parent().css("border", "none");
+                }
+                _height = $(".divcontent_4").height();
+                if (_height > thheight) {
+                    $(".divcontent_4").css("height", thheight);
+                } else {
+                    $("#imgcontent_4").hide();
+                    $("#imgcontent_4").parent().css("border", "none");
+                }
+                _height = $(".divcontent_5").height();
+                if (_height > thheight) {
+                    $(".divcontent_5").css("height", thheight);
+                } else {
+                    $("#imgcontent_5").hide();
+                    $("#imgcontent_5").parent().css("border", "none");
+                }
+            }
+
+            function showorhide_text(classStr, obj) {
+
+                var _height = $("." + classStr).height();
+
+                var rel = $(obj).attr('rel');
+                if (rel == '0') {
+
+                    if (_height < thheight) return false;
+                    $('.' + classStr).css({
+                        "height": "auto"
+                    });
+                    $(obj).attr('rel', '1');
+                    $('img', obj).attr('src', 'Public/myui_v1/images/Estate/icon_down_focus.png');
+                } else {
+                    $('.' + classStr).css("height", thheight);
+                    $(obj).attr('rel', '0');
+                    $('img', obj).attr('src', 'Public/myui_v1/images/Estate/icon_down_default.png');
+                }
+            }
+            // 固定层
+            function buffer(a, b, c) {
+                var d;
+                return function () {
+                    if (d) return;
+                    d = setTimeout(function () {
+                        a.call(this), d = undefined
+                    }, b)
+                }
+            }(function () {
+                function e() {
+                    var d = document.body.scrollTop || document.documentElement.scrollTop;
+                    d > b ? (a.className = "round_mysoft_call_div div2", c && (a.style.top = d - b + "px")) : a.className =
+                        "round_mysoft_call_div"
+                }
+                var a = document.getElementById("float");
+                if (a == undefined) return !1;
+                var b = 0,
+                    c, d = a;
+                while (d) b += d.offsetTop, d = d.offsetParent;
+                c = window.ActiveXObject && !window.XMLHttpRequest;
+                if (!c || !0) window.onscroll = buffer(e, 5, this)
+            })();
+        </script>
+    </div>
+    </div>
+    <div mark="stat_code" style="width: 0px; height: 0px; display: none;"></div>
+    <style>
+        .powered {
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: #aaa;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .powered a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        .powered a:hover,
+        .powered a:visited {
+            color: #aaa;
+        }
+        
+        .powered a:active {
+            color: #2caf56;
+        }
+    </style>
+    <div class="powered" id="powered">
+        Powered&nbsp;by&nbsp;&nbsp;<a href="http://m.myunke.com/">明源云客</a>
+    </div>
+</body>
+
+</html>
